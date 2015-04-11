@@ -73,3 +73,5 @@ local.properties
 
 # ignore all bin files
 src/android/bin/
+
+project.properties
