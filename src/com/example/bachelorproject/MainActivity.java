@@ -1,34 +1,33 @@
 package com.example.bachelorproject;
 
-import android.support.v7.app.ActionBarActivity;
-import android.content.pm.ActivityInfo;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener
 {
+	public final static String EXTRA_IMAGEID = "com.example.bachelorproject.IMAGEREF";
+
 	private ImageButton btnTire, btnSteerWheel, btnCrane;
-	private ImageView ivMain, ivMain1, ivMain2, ivMain3, ivMain4;
+	private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
 	private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
-		// Sets theme and layout for activity
-		setTheme(android.R.style.Theme_Light_NoTitleBar_Fullscreen);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-
+		
 		// setContentView(R.layout.activity_main);
 		setContentView(R.layout.activity_main_view);
 
+		// Initialize ImageButtons
 		btnTire = (ImageButton) findViewById(R.id.ibtnTire);
 		btnTire.setOnClickListener(this);
 		btnSteerWheel = (ImageButton) findViewById(R.id.ibtnSteerWheel);
@@ -36,15 +35,23 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 		btnCrane = (ImageButton) findViewById(R.id.ibtnCrane);
 		btnCrane.setOnClickListener(this);
 
-		ivMain = (ImageView) findViewById(R.id.imageMain);
+		// Initialize ImageViews on the "Start Kran" main
 		ivMain1 = (ImageView) findViewById(R.id.imageMain1);
+		ivMain1.setOnClickListener(this);
 		ivMain2 = (ImageView) findViewById(R.id.imageMain2);
+		ivMain2.setOnClickListener(this);
 		ivMain3 = (ImageView) findViewById(R.id.imageMain3);
+		ivMain3.setOnClickListener(this);
 		ivMain4 = (ImageView) findViewById(R.id.imageMain4);
+		ivMain4.setOnClickListener(this);
 		ivMain5 = (ImageView) findViewById(R.id.imageMain5);
+		ivMain5.setOnClickListener(this);
 		ivMain6 = (ImageView) findViewById(R.id.imageMain6);
+		ivMain6.setOnClickListener(this);
 		ivMain7 = (ImageView) findViewById(R.id.imageMain7);
+		ivMain7.setOnClickListener(this);
 		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
+		ivMain8.setOnClickListener(this);
 	}
 
 	@Override
@@ -69,25 +76,83 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	@Override
 	public void onClick(View v)
 	{
+		// Get image ID for the selected button
 		int imageId = 0;
 		if (v.getId() == R.id.ibtnTire) imageId = R.drawable.daek;
 		else if (v.getId() == R.id.ibtnSteerWheel) imageId = R.drawable.rat;
 		else if (v.getId() == R.id.ibtnCrane) imageId = R.drawable.kran;
 
-		if (ivMain1.getDrawable() == null) ivMain1.setImageResource(imageId);
-		else if (ivMain2.getDrawable() == null) ivMain2
-				.setImageResource(imageId);
-		else if (ivMain3.getDrawable() == null) ivMain3
-				.setImageResource(imageId);
-		else if (ivMain4.getDrawable() == null) ivMain4
-				.setImageResource(imageId);
-		else if (ivMain5.getDrawable() == null) ivMain5
-				.setImageResource(imageId);
-		else if (ivMain6.getDrawable() == null) ivMain6
-				.setImageResource(imageId);
-		else if (ivMain7.getDrawable() == null) ivMain7
-				.setImageResource(imageId);
-		else if (ivMain8.getDrawable() == null) ivMain8
-				.setImageResource(imageId);
+		// Set selected image on the "Start kran" image
+		if (v.getId() == R.id.ibtnTire || v.getId() == R.id.ibtnSteerWheel
+				|| v.getId() == R.id.ibtnCrane)
+		{
+			Log.i("MainActivity", "------ IMAGEID BUTTONS: " + imageId);
+
+			if (ivMain1.getDrawable() == null)
+			{
+				ivMain1.setImageResource(imageId);
+				ivMain1.setTag(imageId);
+			}
+			else if (ivMain2.getDrawable() == null)
+			{
+				ivMain2.setImageResource(imageId);
+				ivMain2.setTag(imageId);
+			}
+			else if (ivMain3.getDrawable() == null)
+			{
+				ivMain3.setImageResource(imageId);
+				ivMain3.setTag(imageId);
+			}
+			else if (ivMain4.getDrawable() == null)
+			{
+				ivMain4.setImageResource(imageId);
+				ivMain4.setTag(imageId);
+			}
+			else if (ivMain5.getDrawable() == null)
+			{
+				ivMain5.setImageResource(imageId);
+				ivMain5.setTag(imageId);
+			}
+			else if (ivMain6.getDrawable() == null)
+			{
+				ivMain6.setImageResource(imageId);
+				ivMain6.setTag(imageId);
+			}
+			else if (ivMain7.getDrawable() == null)
+			{
+				ivMain7.setImageResource(imageId);
+				ivMain7.setTag(imageId);
+			}
+			else if (ivMain8.getDrawable() == null)
+			{
+				ivMain8.setImageResource(imageId);
+				ivMain8.setTag(imageId);
+			}
+		}
+		// When clicking on an image on the "Start kran" image
+		else
+		{
+			int imageRef = getImageViewId((ImageView) v);
+			Log.i("MainActivity", "------ IMAGEID IMAGES: " + imageRef);
+			
+			/*
+			 * creates an intent which, when executed with startActivity, does
+			 * two things:
+			 * It starts a new activity of class DisplayCommandoActivity
+			 * (specified by the parameter)
+			 * It passes imageId (= the user input) into the activity, tagged
+			 * with the string content of EXTRA_IMAGEID
+			 */
+			Intent intent = new Intent(this, DisplayCommandoActivity.class);
+			intent.putExtra(EXTRA_IMAGEID, imageRef);
+
+			startActivity(intent);
+		}
+	}
+
+	// Method to get the image from the ImageView
+	public int getImageViewId(ImageView v)
+	{
+		return (Integer) v.getTag();
 	}
 }
