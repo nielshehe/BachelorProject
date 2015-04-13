@@ -3,5 +3,8 @@
 
     <string name="app_name">Bachelor Project F15</string>
     <string name="action_settings">Settings</string>
+    <string name="title_commando_view">Commando view</string>
+    <string name="title_activity_display_commando">Commando view</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
