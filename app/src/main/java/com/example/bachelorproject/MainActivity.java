@@ -3,7 +3,6 @@ package com.example.bachelorproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,9 +23,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
-		// setContentView(R.layout.activity_main);
-		setContentView(R.layout.activity_main_view);
+
+		setContentView(R.layout.activity_main);
 
 		// Initialize ImageButtons
 		btnTire = (ImageButton) findViewById(R.id.ibtnTire);
@@ -90,50 +88,34 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			if (ivMain1.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain1, imageId);
-				//ivMain1.setImageResource(imageId);
-				//ivMain1.setTag(imageId);
 			}
 			else if (ivMain2.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain2, imageId);
-				//ivMain2.setImageResource(imageId);
-				//ivMain2.setTag(imageId);
 			}
 			else if (ivMain3.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain3, imageId);
-				//ivMain3.setImageResource(imageId);
-				//ivMain3.setTag(imageId);
 			}
 			else if (ivMain4.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain4, imageId);
-				//ivMain4.setImageResource(imageId);
-				//ivMain4.setTag(imageId);
 			}
 			else if (ivMain5.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain5, imageId);
-				//ivMain5.setImageResource(imageId);
-				//ivMain5.setTag(imageId);
 			}
 			else if (ivMain6.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain6, imageId);
-				//ivMain6.setImageResource(imageId);
-				//ivMain6.setTag(imageId);
 			}
 			else if (ivMain7.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain7, imageId);
-				//ivMain7.setImageResource(imageId);
-				//ivMain7.setTag(imageId);
 			}
 			else if (ivMain8.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain8, imageId);
-				//ivMain8.setImageResource(imageId);
-				//ivMain8.setTag(imageId);
 			}
 		}
 		// When clicking on an image on the "Start kran" image
