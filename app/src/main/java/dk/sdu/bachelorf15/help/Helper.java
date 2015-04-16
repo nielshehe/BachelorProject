@@ -1,4 +1,4 @@
-package com.example.bachelorproject;
+package dk.sdu.bachelorf15.help;
 
 import android.widget.ImageView;
 

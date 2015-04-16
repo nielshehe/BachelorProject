@@ -10,6 +10,9 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import dk.sdu.bachelorf15.domain.TruckController;
+import dk.sdu.bachelorf15.help.Helper;
+
 public class MainActivity extends ActionBarActivity implements OnClickListener
 {
 	public final static String EXTRA_IMAGEID = "com.example.bachelorproject.IMAGEREF";
@@ -51,6 +54,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 		ivMain7.setOnClickListener(this);
 		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
 		ivMain8.setOnClickListener(this);
+
+        // Create a new Truck
+        TruckController.getInstance();
 	}
 
 	@Override

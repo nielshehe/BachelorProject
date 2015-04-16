@@ -1,8 +1,37 @@
 package dk.sdu.bachelorf15.domain;
 
-public class SteeringWheel
+import java.util.HashMap;
+
+import dk.sdu.bachelorf15.help.CommandInterface;
+import dk.sdu.bachelorf15.help.Commands;
+
+public class SteeringWheel implements CommandInterface
 {
-	public void turnLeft()
+    private HashMap<Integer, Commands> steer = new HashMap<>();
+    private int steerIndex = 1;
+
+    public HashMap<Integer, Commands> getSteeringMap()
+    {
+        return this.steer;
+    }
+
+    @Override
+    public void addCommand(Commands com)
+    {
+        if(steerIndex <= MAX_COMMANDO_LENGTH)
+        {
+            this.steer.put(steerIndex, com);
+            this.steerIndex++;
+        }
+    }
+
+    @Override
+    public Commands getCommand(int i) {
+        return steer.get(i);
+    }
+
+
+    public void turnLeft()
 	{
 		//TODO
 	}

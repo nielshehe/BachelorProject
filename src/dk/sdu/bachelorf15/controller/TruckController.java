@@ -1,4 +1,4 @@
-package dk.sdu.bachelorf15.controller;
+package dk.sdu.bachelorf15.help;
 
 import dk.sdu.bachelorf15.domain.Crane;
 import dk.sdu.bachelorf15.domain.SteeringWheel;
