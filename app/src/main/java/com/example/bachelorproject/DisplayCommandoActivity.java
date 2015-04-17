@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import dk.sdu.bachelorf15.domain.TruckController;
+import dk.sdu.bachelorf15.domain.Truck;
 import dk.sdu.bachelorf15.help.Commands;
 import dk.sdu.bachelorf15.help.Helper;
 import dk.sdu.bachelorf15.help.TruckObjects;
@@ -185,17 +185,17 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
             if (ivCommandoMain1.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain1, imageId);
-                TruckController.getInstance().addCommand(mapIndex, 1 , truckObject, command);
+                Truck.getInstance().addCommand(mapIndex, 1 , truckObject, command);
             }
             else if (ivCommandoMain2.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain2, imageId);
-                TruckController.getInstance().addCommand(mapIndex, 2,  truckObject, command);
+                Truck.getInstance().addCommand(mapIndex, 2,  truckObject, command);
             }
             else if (ivCommandoMain3.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain3, imageId);
-                TruckController.getInstance().addCommand(mapIndex, 3, truckObject, command);
+                Truck.getInstance().addCommand(mapIndex, 3, truckObject, command);
             }
         }
         txtView1.setText("TRUCKOBJECT: " + truckObject + " COMMAND: " + command);

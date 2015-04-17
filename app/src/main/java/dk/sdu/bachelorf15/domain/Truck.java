@@ -8,6 +8,16 @@ import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class Truck
 {
+    // Singleton pattern
+    private static Truck instance;
+
+    public static Truck getInstance()
+    {
+        if(instance == null)
+            instance = new Truck();
+        return instance;
+    }
+
     private HashMap<Integer, HashMap<Integer, Commands>> truck = new HashMap<>();
     private static final int MAX_LENGTH = 8;
 

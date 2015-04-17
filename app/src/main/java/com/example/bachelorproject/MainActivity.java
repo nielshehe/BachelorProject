@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import dk.sdu.bachelorf15.domain.TruckController;
+import dk.sdu.bachelorf15.domain.Truck;
 import dk.sdu.bachelorf15.help.Helper;
 import dk.sdu.bachelorf15.help.TruckObjects;
 
@@ -65,9 +65,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 		ivMain7.setOnClickListener(this);
 		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
 		ivMain8.setOnClickListener(this);
-
-        // Create a new Truck
-        TruckController.getInstance();
 
         // TODO TEST TRUCK AND MAP
         txtView = (TextView) findViewById(R.id.textView);
@@ -122,49 +119,49 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
                 help.setImageAndTag(ivMain1, imageId);
                 // Set the index of the Truck map when you add a object
                 index = 1;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain2.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain2, imageId);
                 index = 2;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
             }
 			else if (ivMain3.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain3, imageId);
                 index = 3;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain4.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain4, imageId);
                 index = 4;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain5.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain5, imageId);
                 index = 5;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain6.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain6, imageId);
                 index = 6;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain7.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain7, imageId);
                 index = 7;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain8.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain8, imageId);
                 index = 8;
-                TruckController.getInstance().addObject(index, truckObject);
+                Truck.getInstance().addObject(index, truckObject);
 			}
 		}
 		// When clicking on an image on the "Start kran" image
@@ -215,6 +212,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
 			startActivity(intent);
 		}
-        txtView.setText("TRUCK: " + TruckController.getInstance().toString());
+        txtView.setText("TRUCK: " + Truck.getInstance().toString());
 	}
 }
