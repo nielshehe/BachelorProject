@@ -26,6 +26,12 @@ public class SteeringWheel implements CommandInterface
     }
 
     @Override
+    public void addCommand(HashMap<Integer, Commands> map, Commands com)
+    {
+
+    }
+
+    @Override
     public Commands getCommand(int i) {
         return steer.get(i);
     }

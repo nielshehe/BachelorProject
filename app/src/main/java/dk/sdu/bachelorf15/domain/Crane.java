@@ -26,6 +26,12 @@ public class Crane implements CommandInterface
     }
 
     @Override
+    public void addCommand(HashMap<Integer, Commands> map, Commands com)
+    {
+
+    }
+
+    @Override
     public Commands getCommand(int i) {
         return crane.get(i);
     }

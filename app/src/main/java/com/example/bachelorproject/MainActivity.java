@@ -3,6 +3,7 @@ package com.example.bachelorproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 
 import dk.sdu.bachelorf15.domain.TruckController;
 import dk.sdu.bachelorf15.help.Helper;
+import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener
 {
@@ -21,6 +23,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
 	private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
     private Helper help = new Helper();
+
+    private TruckObjects truckObject;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -83,9 +87,21 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	{
 		// Get image ID for the selected button
 		int imageId = 0;
-		if (v.getId() == R.id.ibtnTire) imageId = R.drawable.daek;
-		else if (v.getId() == R.id.ibtnSteerWheel) imageId = R.drawable.rat;
-		else if (v.getId() == R.id.ibtnCrane) imageId = R.drawable.kran;
+		if (v.getId() == R.id.ibtnTire)
+        {
+            imageId = R.drawable.daek;
+            truckObject = TruckObjects.TIRE;
+        }
+		else if (v.getId() == R.id.ibtnSteerWheel)
+        {
+            imageId = R.drawable.rat;
+            truckObject = TruckObjects.STEERINGWHEEL;
+        }
+		else if (v.getId() == R.id.ibtnCrane)
+        {
+            imageId = R.drawable.kran;
+            truckObject = TruckObjects.CRANE;
+        }
 
 		// Set selected image on the "Start kran" image
 		if (v.getId() == R.id.ibtnTire || v.getId() == R.id.ibtnSteerWheel
@@ -94,34 +110,50 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			if (ivMain1.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain1, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 1: " + TruckController.getInstance().toString());
 			}
 			else if (ivMain2.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain2, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 2: " + TruckController.getInstance().toString());
 			}
 			else if (ivMain3.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain3, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 3: " + TruckController.getInstance().toString());
 			}
 			else if (ivMain4.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain4, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 4: " + TruckController.getInstance().toString());
 			}
 			else if (ivMain5.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain5, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 5: " + TruckController.getInstance().toString());
 			}
 			else if (ivMain6.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain6, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 6: " + TruckController.getInstance().toString());
 			}
 			else if (ivMain7.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain7, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 7: " + TruckController.getInstance().toString());
 			}
 			else if (ivMain8.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain8, imageId);
+                TruckController.getInstance().addObject(truckObject);
+                Log.i("MainActivity", "TRUCK 8: " + TruckController.getInstance().toString());
 			}
 		}
 		// When clicking on an image on the "Start kran" image

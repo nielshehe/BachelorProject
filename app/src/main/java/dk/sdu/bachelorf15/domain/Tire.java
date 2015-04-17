@@ -26,6 +26,17 @@ public class Tire implements CommandInterface
     }
 
     @Override
+    public void addCommand(HashMap<Integer, Commands> map, Commands com)
+    {
+        this.tire = map;
+        if(tireIndex <= MAX_COMMANDO_LENGTH)
+        {
+            this.tire.put(tireIndex, com);
+            this.tireIndex++;
+        }
+    }
+
+    @Override
     public Commands getCommand(int i)
     {
         return tire.get(i);

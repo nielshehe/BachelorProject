@@ -41,6 +41,14 @@ public class Truck
         }
     }
 
+    public void addCommand(int i, Commands com)
+    {
+        // TODO GET THE MAP VALUE AND ADD A COMMAND TO IT
+
+        HashMap<Integer, Commands> map = truck.get(i);
+        commads.addCommand(map, com);
+    }
+
     public String toString()
     {
         return truck.toString();

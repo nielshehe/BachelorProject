@@ -37,8 +37,13 @@ public class TruckController
     {
 
     }
-	
-	// TODO Implement addCommand - check return value
+
+    @Override
+    public String toString() {
+        return t.toString();
+    }
+
+    // TODO Implement addCommand - check return value
 /*	public void addCommand()
 	{
         Commands[] commandArray = new Commands[3];

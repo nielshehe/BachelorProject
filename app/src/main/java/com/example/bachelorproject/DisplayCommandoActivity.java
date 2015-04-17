@@ -10,14 +10,20 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import dk.sdu.bachelorf15.domain.TruckController;
+import dk.sdu.bachelorf15.help.Commands;
 import dk.sdu.bachelorf15.help.Helper;
+import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class DisplayCommandoActivity extends ActionBarActivity implements View.OnClickListener
 {
 	private ImageView ivObjectMain;
     private ImageView ivCommandoMain1, ivCommandoMain2, ivCommandoMain3;
     private ImageButton btnCommando1, btnCommando2, btnCommando3, btnCommando4;
+
     private Helper help = new Helper();
+    private TruckObjects truckObject;
+    private Commands command;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -66,12 +72,14 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
             help.setImageAndTag(ivObjectMain, R.drawable.daekmain);
             btnCommando1.setImageResource(R.drawable.daekop);
             btnCommando2.setImageResource(R.drawable.daekned);
+            truckObject = TruckObjects.TIRE;
         }
 		else if (imageID == R.drawable.rat)
         {
             help.setImageAndTag(ivObjectMain, R.drawable.ratmain);
             btnCommando1.setImageResource(R.drawable.ratvenstre);
             btnCommando2.setImageResource(R.drawable.rathoejre);
+            truckObject = TruckObjects.STEERINGWHEEL;
         }
 		else if (imageID == R.drawable.kran)
         {
@@ -80,6 +88,7 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
             btnCommando2.setImageResource(R.drawable.kranop);
             btnCommando3.setImageResource(R.drawable.kranned);
             btnCommando4.setImageResource(R.drawable.kranhoejre);
+            truckObject = TruckObjects.CRANE;
         }
 	}
 
@@ -110,19 +119,47 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
 
         if (help.getImageId(ivObjectMain) == R.drawable.daekmain)
         {
-            if (v.getId() == R.id.imagebtnCommando1) imageId = R.drawable.daekop;
-            else if (v.getId() == R.id.imagebtnCommando2) imageId = R.drawable.daekned;
+            if (v.getId() == R.id.imagebtnCommando1)
+            {
+                imageId = R.drawable.daekop;
+                command = Commands.TIRE_MOVE_FORWARD;
+            }
+            else if (v.getId() == R.id.imagebtnCommando2)
+            {
+                imageId = R.drawable.daekned;
+                command = Commands.TIRE_MOVE_BACKWARD;
+            }
         }
         else if (help.getImageId(ivObjectMain) == R.drawable.ratmain)
         {
-            if (v.getId() == R.id.imagebtnCommando1) imageId = R.drawable.ratvenstre;
-            else if (v.getId() == R.id.imagebtnCommando2) imageId = R.drawable.rathoejre;
+            if (v.getId() == R.id.imagebtnCommando1)
+            {
+                imageId = R.drawable.ratvenstre;
+                command = Commands.STEER_TURN_LEFT;
+            }
+            else if (v.getId() == R.id.imagebtnCommando2)
+            {
+                imageId = R.drawable.rathoejre;
+                command = Commands.STEER_TURN_RIGHT;
+            }
         }
         else if (help.getImageId(ivObjectMain) == R.drawable.kranmain)
         {
-            if (v.getId() == R.id.imagebtnCommando1) imageId = R.drawable.kranvenstre;
-            else if (v.getId() == R.id.imagebtnCommando2) imageId = R.drawable.kranop;
-            else if (v.getId() == R.id.imagebtnCommando3) imageId = R.drawable.kranned;
+            if (v.getId() == R.id.imagebtnCommando1)
+            {
+                imageId = R.drawable.kranvenstre;
+                command = Commands.CRANE_TURN_LEFT;
+            }
+            else if (v.getId() == R.id.imagebtnCommando2)
+            {
+                imageId = R.drawable.kranop;
+                command = Commands.CRANE_BOX_PICKUP;
+            }
+            else if (v.getId() == R.id.imagebtnCommando3)
+            {
+                imageId = R.drawable.kranned;
+
+            }
             else if (v.getId() == R.id.imagebtnCommando4) imageId = R.drawable.kranhoejre;
         }
 
@@ -133,6 +170,7 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
             if (ivCommandoMain1.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain1, imageId);
+                TruckController.getInstance().addCommand(truckObject,command);
             }
             else if (ivCommandoMain2.getDrawable() == null)
             {
