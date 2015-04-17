@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dk.sdu.bachelorf15.help.CommandInterface;
 import dk.sdu.bachelorf15.help.Commands;
+import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class Crane implements CommandInterface
 {
@@ -16,6 +17,24 @@ public class Crane implements CommandInterface
     }
 
     @Override
+    public void addCommand(int index, HashMap<Integer, Commands> map, Commands com)
+    {
+        crane = map;
+        if(index <= MAX_COMMANDO_LENGTH)
+        {
+            crane.put(index, com);
+        }
+
+    }
+
+    @Override
+    public Commands getCommand(int i) {
+        return crane.get(i);
+    }
+
+
+    // TODO REMOVE UNUSED
+    @Override
     public void addCommand(Commands com)
     {
         if(craneIndex <= MAX_COMMANDO_LENGTH)
@@ -25,16 +44,34 @@ public class Crane implements CommandInterface
         }
     }
 
+    // TODO REMOVE UNUSED
     @Override
     public void addCommand(HashMap<Integer, Commands> map, Commands com)
     {
-
+        crane = map;
+        if(craneIndex <= MAX_COMMANDO_LENGTH)
+        {
+            crane.put(craneIndex, com);
+            craneIndex++;
+        }
     }
 
+    // TODO REMOVE UNUSED
     @Override
-    public Commands getCommand(int i) {
-        return crane.get(i);
+    public void addCommand(TruckObjects truckObject, HashMap<Integer, Commands> map, Commands com)
+    {
+        if(truckObject == TruckObjects.CRANE)
+        {
+            crane = map;
+            if(craneIndex <= MAX_COMMANDO_LENGTH)
+            {
+                crane.put(craneIndex, com);
+                craneIndex++;
+            }
+        }
+
     }
+
 
     public void pickBoxUp()
 	{

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dk.sdu.bachelorf15.help.CommandInterface;
 import dk.sdu.bachelorf15.help.Commands;
+import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class SteeringWheel implements CommandInterface
 {
@@ -16,6 +17,24 @@ public class SteeringWheel implements CommandInterface
     }
 
     @Override
+    public void addCommand(int index, HashMap<Integer, Commands> map, Commands com)
+    {
+        steer = map;
+        if(index <= MAX_COMMANDO_LENGTH)
+        {
+            steer.put(index, com);
+        }
+    }
+
+    @Override
+    public Commands getCommand(int i) {
+        return steer.get(i);
+    }
+
+
+
+    // TODO REMOVE UNUSED
+    @Override
     public void addCommand(Commands com)
     {
         if(steerIndex <= MAX_COMMANDO_LENGTH)
@@ -25,16 +44,34 @@ public class SteeringWheel implements CommandInterface
         }
     }
 
+    // TODO REMOVE UNUSED
     @Override
     public void addCommand(HashMap<Integer, Commands> map, Commands com)
     {
+        steer = map;
+        if(steerIndex <= MAX_COMMANDO_LENGTH)
+        {
+            steer.put(steerIndex, com);
+            steerIndex++;
+        }
 
     }
 
+    // TODO REMOVE UNUSED
     @Override
-    public Commands getCommand(int i) {
-        return steer.get(i);
+    public void addCommand(TruckObjects truckObject, HashMap<Integer, Commands> map, Commands com)
+    {
+        if(truckObject == TruckObjects.STEERINGWHEEL)
+        {
+            steer = map;
+            if(steerIndex <= MAX_COMMANDO_LENGTH)
+            {
+                steer.put(steerIndex, com);
+                steerIndex++;
+            }
+        }
     }
+
 
 
     public void turnLeft()

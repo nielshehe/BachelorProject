@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import dk.sdu.bachelorf15.domain.TruckController;
 import dk.sdu.bachelorf15.help.Helper;
@@ -18,6 +19,7 @@ import dk.sdu.bachelorf15.help.TruckObjects;
 public class MainActivity extends ActionBarActivity implements OnClickListener
 {
 	public final static String EXTRA_IMAGEID = "com.example.bachelorproject.IMAGEREF";
+    public final static String EXTRA_INDEX = "com.example.bachelorproject.INDEX";
 
 	private ImageButton btnTire, btnSteerWheel, btnCrane;
 	private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
@@ -26,10 +28,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
     private TruckObjects truckObject;
 
+    // TODO TEST TRUCK AND MAP
+    private TextView txtView;
+    private int index = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+
 
 		setContentView(R.layout.activity_main);
 
@@ -61,6 +68,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
         // Create a new Truck
         TruckController.getInstance();
+
+        // TODO TEST TRUCK AND MAP
+        txtView = (TextView) findViewById(R.id.textView);
 	}
 
 	@Override
@@ -110,57 +120,87 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			if (ivMain1.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain1, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 1: " + TruckController.getInstance().toString());
+                // Set the index of the Truck map when you add a object
+                index = 1;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain2.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain2, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 2: " + TruckController.getInstance().toString());
-			}
+                index = 2;
+                TruckController.getInstance().addObject(index, truckObject);
+            }
 			else if (ivMain3.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain3, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 3: " + TruckController.getInstance().toString());
+                index = 3;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain4.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain4, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 4: " + TruckController.getInstance().toString());
+                index = 4;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain5.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain5, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 5: " + TruckController.getInstance().toString());
+                index = 5;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain6.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain6, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 6: " + TruckController.getInstance().toString());
+                index = 6;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain7.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain7, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 7: " + TruckController.getInstance().toString());
+                index = 7;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain8.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain8, imageId);
-                TruckController.getInstance().addObject(truckObject);
-                Log.i("MainActivity", "TRUCK 8: " + TruckController.getInstance().toString());
+                index = 8;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 		}
 		// When clicking on an image on the "Start kran" image
 		else
 		{
 			int imageRef = help.getImageId((ImageView) v);
-			
+
+            // Set the index of the Truck map, if you don't add a new object, but just change one instead
+            switch (v.getId())
+            {
+                case R.id.imageMain1:
+                    index = 1;
+                    break;
+                case R.id.imageMain2:
+                    index = 2;
+                    break;
+                case R.id.imageMain3:
+                    index = 3;
+                    break;
+                case R.id.imageMain4:
+                    index = 4;
+                    break;
+                case R.id.imageMain5:
+                    index = 5;
+                    break;
+                case R.id.imageMain6:
+                    index = 6;
+                    break;
+                case R.id.imageMain7:
+                    index = 7;
+                    break;
+                case R.id.imageMain8:
+                    index = 8;
+                    break;
+            }
+
 			/*
 			 * creates an intent which, when executed with startActivity, does
 			 * two things:
@@ -171,8 +211,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			 */
 			Intent intent = new Intent(this, DisplayCommandoActivity.class);
 			intent.putExtra(EXTRA_IMAGEID, imageRef);
+            intent.putExtra(EXTRA_INDEX, index);
 
 			startActivity(intent);
 		}
+        txtView.setText("TRUCK: " + TruckController.getInstance().toString());
 	}
 }

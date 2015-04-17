@@ -9,7 +9,12 @@ public interface CommandInterface
 {
     static final int MAX_COMMANDO_LENGTH = 3;
 
+
+    void addCommand(int index, HashMap<Integer, Commands> map, Commands com);
+    Commands getCommand(int i);
+
+    // TODO REMOVE UNUSED
     void addCommand(Commands com);
     void addCommand(HashMap<Integer, Commands> map, Commands com);
-    Commands getCommand(int i);
+    void addCommand(TruckObjects truckObject, HashMap<Integer, Commands> map, Commands com);
 }

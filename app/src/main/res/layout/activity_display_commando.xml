@@ -56,7 +56,8 @@
         android:layout_alignLeft="@+id/imageObjectMain"
         android:layout_below="@+id/imageObjectMain"
         android:background="#00FFFFFF"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:id="@+id/linearLayout">
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -94,5 +95,14 @@
             android:layout_weight="1"
             android:layout_gravity="center" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout" />
 
 </RelativeLayout>

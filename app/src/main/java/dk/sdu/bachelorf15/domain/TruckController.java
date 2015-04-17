@@ -27,14 +27,21 @@ public class TruckController
     private Commands command;
     private TruckObjects truckObjects;
 
-	public void addObject(TruckObjects obj)
-	{
-        t.addObject(obj);
-	}
-
-    // TODO
-    public void addCommand(TruckObjects obj, Commands com)
+    public void addObject(int index, TruckObjects obj)
     {
+        t.addObject(index, obj);
+    }
+
+    // TODO REMOVE UNUSED
+    /*public void addCommand(int index, TruckObjects obj, Commands com)
+    {
+        t.addCommand(index, obj, com);
+
+    }*/
+
+    public void addCommand(int objectIndex, int commandIndex, TruckObjects obj, Commands com)
+    {
+        t.addCommand(objectIndex, commandIndex, obj, com);
 
     }
 

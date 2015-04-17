@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dk.sdu.bachelorf15.help.CommandInterface;
 import dk.sdu.bachelorf15.help.Commands;
+import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class Tire implements CommandInterface
 {
@@ -16,6 +17,18 @@ public class Tire implements CommandInterface
     }
 
     @Override
+    public void addCommand(int index, HashMap<Integer, Commands> map, Commands com)
+    {
+        tire = map;
+        if(index <= MAX_COMMANDO_LENGTH)
+        {
+            tire.put(index, com);
+        }
+    }
+
+
+    // TODO REMOVE UNUSED
+    @Override
     public void addCommand(Commands com)
     {
         if(tireIndex <= MAX_COMMANDO_LENGTH)
@@ -25,14 +38,30 @@ public class Tire implements CommandInterface
         }
     }
 
+    // TODO REMOVE UNUSED
     @Override
     public void addCommand(HashMap<Integer, Commands> map, Commands com)
     {
-        this.tire = map;
+        tire = map;
         if(tireIndex <= MAX_COMMANDO_LENGTH)
         {
-            this.tire.put(tireIndex, com);
-            this.tireIndex++;
+            tire.put(tireIndex, com);
+            tireIndex++;
+        }
+    }
+
+    // TODO REMOVE UNUSED
+    @Override
+    public void addCommand(TruckObjects truckObject, HashMap<Integer, Commands> map, Commands com)
+    {
+        if(truckObject == TruckObjects.TIRE)
+        {
+            tire = map;
+            if(tireIndex <= MAX_COMMANDO_LENGTH)
+            {
+                tire.put(tireIndex, com);
+                tireIndex++;
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import dk.sdu.bachelorf15.domain.TruckController;
 import dk.sdu.bachelorf15.help.Commands;
@@ -17,6 +18,8 @@ import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class DisplayCommandoActivity extends ActionBarActivity implements View.OnClickListener
 {
+    private int mapIndex;
+
 	private ImageView ivObjectMain;
     private ImageView ivCommandoMain1, ivCommandoMain2, ivCommandoMain3;
     private ImageButton btnCommando1, btnCommando2, btnCommando3, btnCommando4;
@@ -24,6 +27,9 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
     private Helper help = new Helper();
     private TruckObjects truckObject;
     private Commands command;
+
+    // TODO TEST TRUCK MAP
+    private TextView txtView1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -66,6 +72,7 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
 		Intent intent = getIntent();
 		int imageID = intent.getIntExtra(MainActivity.EXTRA_IMAGEID,
 				R.drawable.startmain);
+        mapIndex = intent.getIntExtra(MainActivity.EXTRA_INDEX, 1);
 
 		if (imageID == R.drawable.daek)
         {
@@ -90,6 +97,10 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
             btnCommando4.setImageResource(R.drawable.kranhoejre);
             truckObject = TruckObjects.CRANE;
         }
+
+        // TODO TEST TRUCK MAP
+        txtView1 = (TextView) findViewById(R.id.textView2);
+        txtView1.setText("INDEX: " + mapIndex);
 	}
 
 	@Override
@@ -158,28 +169,35 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
             else if (v.getId() == R.id.imagebtnCommando3)
             {
                 imageId = R.drawable.kranned;
-
+                command = Commands.CRANE_BOX_PUTDOWN;
             }
-            else if (v.getId() == R.id.imagebtnCommando4) imageId = R.drawable.kranhoejre;
+            else if (v.getId() == R.id.imagebtnCommando4)
+            {
+                imageId = R.drawable.kranhoejre;
+                command = Commands.CRANE_TURN_RIGHT;
+            }
         }
 
-        // Set selected image on the map for the objects Tire, Steeringwheel and crane
+        // Set selected image on the map for the objects Tire, Steeringwheel and Crane
         if (v.getId() == R.id.imagebtnCommando1 || v.getId() == R.id.imagebtnCommando2
                 || v.getId() == R.id.imagebtnCommando3 || v.getId() == R.id.imagebtnCommando4)
         {
             if (ivCommandoMain1.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain1, imageId);
-                TruckController.getInstance().addCommand(truckObject,command);
+                TruckController.getInstance().addCommand(mapIndex, 1 , truckObject, command);
             }
             else if (ivCommandoMain2.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain2, imageId);
+                TruckController.getInstance().addCommand(mapIndex, 2,  truckObject, command);
             }
             else if (ivCommandoMain3.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain3, imageId);
+                TruckController.getInstance().addCommand(mapIndex, 3, truckObject, command);
             }
         }
+        txtView1.setText("TRUCKOBJECT: " + truckObject + " COMMAND: " + command);
     }
 }
