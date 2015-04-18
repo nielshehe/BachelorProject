@@ -13,6 +13,7 @@ public class Helper
         return (Integer) view.getTag();
     }
 
+    // Method to set an image on the view and set a tag
     public void setImageAndTag(ImageView image, int imageId)
     {
         image.setImageResource(imageId);

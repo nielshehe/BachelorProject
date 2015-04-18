@@ -18,6 +18,7 @@ import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class DisplayCommandActivity extends ActionBarActivity implements View.OnClickListener
 {
+    // Extra send from MainActivity
     private int mapIndex;
 
 	private ImageView ivObjectMain;
@@ -28,6 +29,13 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
     private TruckObjects truckObject;
     private Commands command;
 
+    // Variables if there is commands in the map
+    private Commands[] foundCommands;
+    private Commands commandOne;
+    private Commands commandTwo;
+    private Commands commandThree;
+
+
     // TODO REMOVE ONLY TO TEST TRUCK MAP
     private TextView txtView1;
 
@@ -36,7 +44,7 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
 	{
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_display_commando);
+		setContentView(R.layout.activity_display_command);
 
 		// Set the activity to only fill half the screen
 		WindowManager.LayoutParams params = getWindow().getAttributes();
@@ -74,6 +82,7 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
 				R.drawable.startmain);
         mapIndex = intent.getIntExtra(MainActivity.EXTRA_INDEX, 1);
 
+        // Set images on the command image buttons
 		if (imageRef == R.drawable.daek)
         {
             help.setImageAndTag(ivObjectMain, R.drawable.daekmain);
@@ -98,9 +107,26 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
             truckObject = TruckObjects.CRANE;
         }
 
+        // Set images for commands on the ivObjectMain if there are commands in the map
+        getCommands(mapIndex, truckObject);
+        if(commandOne != null)
+        {
+            ivCommandoMain1.setImageResource(getCommandImage(commandOne));
+        }
+        if(commandTwo != null)
+        {
+            ivCommandoMain2.setImageResource(getCommandImage(commandTwo));
+        }
+        if(commandThree != null)
+        {
+            ivCommandoMain3.setImageResource(getCommandImage(commandThree));
+        }
+
         // TODO REMOVE ONLY TO TEST TRUCK MAP
         txtView1 = (TextView) findViewById(R.id.textView2);
-        txtView1.setText("INDEX: " + mapIndex);
+        txtView1.setText("INDEX: " + mapIndex
+        + "\nCOMMAND1: " + commandOne + " COMMAND2: " + commandTwo + " COMMAND3: " + commandThree);
+
 	}
 
 	@Override
@@ -190,14 +216,71 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
             else if (ivCommandoMain2.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain2, imageId);
-                Truck.getInstance().addCommand(mapIndex, 2,  truckObject, command);
+                    Truck.getInstance().addCommand(mapIndex, 2,  truckObject, command);
             }
-            else if (ivCommandoMain3.getDrawable() == null)
+                else if (ivCommandoMain3.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain3, imageId);
                 Truck.getInstance().addCommand(mapIndex, 3, truckObject, command);
             }
         }
         txtView1.setText("TRUCKOBJECT: " + truckObject + " COMMAND: " + command);
+    }
+
+    public int getCommandImage(Commands com)
+    {
+        int commandImage = 0;
+        switch (com)
+        {
+            case TIRE_MOVE_FORWARD:
+                commandImage = R.drawable.daekop;
+                break;
+            case TIRE_MOVE_BACKWARD:
+                commandImage = R.drawable.daekned;
+                break;
+            case STEER_TURN_LEFT:
+                commandImage = R.drawable.ratvenstre;
+                break;
+            case STEER_TURN_RIGHT:
+                commandImage = R.drawable.rathoejre;
+                break;
+            case CRANE_BOX_PICKUP:
+                commandImage = R.drawable.kranop;
+                break;
+            case CRANE_BOX_PUTDOWN:
+                commandImage = R.drawable.kranned;
+                break;
+            case CRANE_TURN_LEFT:
+                commandImage = R.drawable.kranvenstre;
+                break;
+            case CRANE_TURN_RIGHT:
+                commandImage = R.drawable.kranhoejre;
+                break;
+        }
+        return commandImage;
+    }
+
+    public void getCommands(int i, TruckObjects obj)
+    {
+        foundCommands = Truck.getInstance().getCommands(i, obj);
+        int commandIndex = 1;
+
+        for (Commands com : foundCommands)
+        {
+            switch (commandIndex)
+            {
+                case 1:
+                    commandOne = com;
+                    commandIndex++;
+                    break;
+                case 2:
+                    commandTwo = com;
+                    commandIndex++;
+                    break;
+                case 3:
+                    commandThree = com;
+                    break;
+            }
+        }
     }
 }

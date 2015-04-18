@@ -3,7 +3,6 @@ package com.example.bachelorproject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,30 +12,35 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import dk.sdu.bachelorf15.domain.Truck;
+import dk.sdu.bachelorf15.help.Commands;
 import dk.sdu.bachelorf15.help.Helper;
 import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener
 {
+    private ImageButton btnTire, btnSteerWheel, btnCrane;
+    private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
+    private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
+
+    // Variables to send to the DisplayCommandActivity
+    // Keep track of which picture that is pressed to start the next activity (in onClick)
 	public final static String EXTRA_IMAGEID = "com.example.bachelorproject.IMAGEREF";
+    // Keep track of which image is pressed to know the index of the truck map
     public final static String EXTRA_INDEX = "com.example.bachelorproject.INDEX";
 
-	private ImageButton btnTire, btnSteerWheel, btnCrane;
-	private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
-	private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
-    private Helper help = new Helper();
-
+    // Index for the truck map and variable for the object
+    private int index = 0;
     private TruckObjects truckObject;
 
-    // TODO TEST TRUCK AND MAP
+    private Helper help = new Helper();
+
+    // TODO REMOVE ONLY TO TEST TRUCK AND MAP
     private TextView txtView;
-    private int index = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
 
 		setContentView(R.layout.activity_main);
 
@@ -201,17 +205,20 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			/*
 			 * creates an intent which, when executed with startActivity, does
 			 * two things:
-			 * It starts a new activity of class DisplayCommandoActivity
+			 * It starts a new activity of class DisplayCommandActivity
 			 * (specified by the parameter)
 			 * It passes imageId (= the user input) into the activity, tagged
 			 * with the string content of EXTRA_IMAGEID
 			 */
-			Intent intent = new Intent(this, DisplayCommandoActivity.class);
+			Intent intent = new Intent(this, DisplayCommandActivity.class);
+            // Send int for which images is pressed to DisplayCommandActivity
 			intent.putExtra(EXTRA_IMAGEID, imageRef);
+            // Send index for the truck map
             intent.putExtra(EXTRA_INDEX, index);
 
 			startActivity(intent);
 		}
+
         txtView.setText("TRUCK: " + Truck.getInstance().toString());
 	}
 }
