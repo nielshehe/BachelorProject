@@ -16,7 +16,7 @@ import dk.sdu.bachelorf15.help.Commands;
 import dk.sdu.bachelorf15.help.Helper;
 import dk.sdu.bachelorf15.help.TruckObjects;
 
-public class DisplayCommandoActivity extends ActionBarActivity implements View.OnClickListener
+public class DisplayCommandActivity extends ActionBarActivity implements View.OnClickListener
 {
     private int mapIndex;
 
@@ -28,7 +28,7 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
     private TruckObjects truckObject;
     private Commands command;
 
-    // TODO TEST TRUCK MAP
+    // TODO REMOVE ONLY TO TEST TRUCK MAP
     private TextView txtView1;
 
 	@Override
@@ -70,25 +70,25 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
 		 * a different intent which did not set EXTRA_IMAGEID)
 		 */
 		Intent intent = getIntent();
-		int imageID = intent.getIntExtra(MainActivity.EXTRA_IMAGEID,
+		int imageRef = intent.getIntExtra(MainActivity.EXTRA_IMAGEID,
 				R.drawable.startmain);
         mapIndex = intent.getIntExtra(MainActivity.EXTRA_INDEX, 1);
 
-		if (imageID == R.drawable.daek)
+		if (imageRef == R.drawable.daek)
         {
             help.setImageAndTag(ivObjectMain, R.drawable.daekmain);
             btnCommando1.setImageResource(R.drawable.daekop);
             btnCommando2.setImageResource(R.drawable.daekned);
             truckObject = TruckObjects.TIRE;
         }
-		else if (imageID == R.drawable.rat)
+		else if (imageRef == R.drawable.rat)
         {
             help.setImageAndTag(ivObjectMain, R.drawable.ratmain);
             btnCommando1.setImageResource(R.drawable.ratvenstre);
             btnCommando2.setImageResource(R.drawable.rathoejre);
             truckObject = TruckObjects.STEERINGWHEEL;
         }
-		else if (imageID == R.drawable.kran)
+		else if (imageRef == R.drawable.kran)
         {
             help.setImageAndTag(ivObjectMain, R.drawable.kranmain);
             btnCommando1.setImageResource(R.drawable.kranvenstre);
@@ -98,7 +98,7 @@ public class DisplayCommandoActivity extends ActionBarActivity implements View.O
             truckObject = TruckObjects.CRANE;
         }
 
-        // TODO TEST TRUCK MAP
+        // TODO REMOVE ONLY TO TEST TRUCK MAP
         txtView1 = (TextView) findViewById(R.id.textView2);
         txtView1.setText("INDEX: " + mapIndex);
 	}
