@@ -10,43 +10,35 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import dk.sdu.bachelorf15.domain.TruckController;
+import dk.sdu.bachelorf15.help.Helper;
+import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener
 {
 	public final static String EXTRA_IMAGEID = "com.example.bachelorproject.IMAGEREF";
+    public final static String EXTRA_INDEX = "com.example.bachelorproject.INDEX";
 
 	private ImageButton btnTire, btnSteerWheel, btnCrane;
 	private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
 	private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
+    private Helper help = new Helper();
 
-	ImageButton btnPlay;
-	ImageView imgCar;
-	ImageView imgField;
-	ImageButton btnIcon;
-	
-	int numberOfTiles = 5;
-	double halfTileSize;
-	
-	double[] fieldArrX = new double[numberOfTiles];
-	double[] fieldArrY = new double[numberOfTiles];
-	
-	float xDir;
-	
-	// TESTING //
+    private TruckObjects truckObject;
 
-	int helperX = 0;
-	int helperY = 0;
-	
-	// ------- //
-	
+    // TODO TEST TRUCK AND MAP
+    private TextView txtView;
+    private int index = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
-		// setContentView(R.layout.activity_main);
-		setContentView(R.layout.activity_main_view);
+
+
+		setContentView(R.layout.activity_main);
 
 		// Initialize ImageButtons
 		btnTire = (ImageButton) findViewById(R.id.ibtnTire);
@@ -73,54 +65,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 		ivMain7.setOnClickListener(this);
 		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
 		ivMain8.setOnClickListener(this);
-		
-		xDir = 50f;
-		
-		imgCar = (ImageView) findViewById(R.id.imageCar);
-		
-		imgField = (ImageView) findViewById(R.id.imageField);
-		
-		btnPlay = (ImageButton) findViewById(R.id.btnPlay);
-		btnPlay.setOnClickListener(this);
-		
-		btnIcon = (ImageButton) findViewById(R.id.btnIcon);
-		btnIcon.setOnClickListener(new OnClickListener() 
-		{
-			@Override
-            public void onClick(View view) 
-			{
-				System.out.println("Button Icon Clicked");
-				imgCar.setRotation(imgCar.getRotation() + 90);
-				
-				if(imgCar.getRotation() == 360)
-				System.out.println(imgCar.getRotation());
-            }
- 
-        });
 
-	}
-	
-	 public void onWindowFocusChanged(boolean hasFocus) 
-	 {	  
-		  super.onWindowFocusChanged(hasFocus);
-		  
-		  initFieldArray();
-	 }
+        // Create a new Truck
+        TruckController.getInstance();
 
-	private void initFieldArray() {
-		halfTileSize = imgField.getWidth() / numberOfTiles / 2;
-		
-		double startX = imgField.getLeft();
-		double startY = imgField.getTop();
-		double tempHalfTileSize = halfTileSize;
-		
-		for (int n = 0; n < numberOfTiles; n++)
-		{
-			fieldArrX[n] = startX + tempHalfTileSize;
-			fieldArrY[n] = startY + tempHalfTileSize;
-
-			tempHalfTileSize += halfTileSize * 2;
-		}
+        // TODO TEST TRUCK AND MAP
+        txtView = (TextView) findViewById(R.id.textView);
 	}
 
 	@Override
@@ -147,80 +97,110 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	{
 		// Get image ID for the selected button
 		int imageId = 0;
-		if (v.getId() == R.id.ibtnTire) imageId = R.drawable.daek;
-		else if (v.getId() == R.id.ibtnSteerWheel) imageId = R.drawable.rat;
-		else if (v.getId() == R.id.ibtnCrane) imageId = R.drawable.kran;
+		if (v.getId() == R.id.ibtnTire)
+        {
+            imageId = R.drawable.daek;
+            truckObject = TruckObjects.TIRE;
+        }
+		else if (v.getId() == R.id.ibtnSteerWheel)
+        {
+            imageId = R.drawable.rat;
+            truckObject = TruckObjects.STEERINGWHEEL;
+        }
+		else if (v.getId() == R.id.ibtnCrane)
+        {
+            imageId = R.drawable.kran;
+            truckObject = TruckObjects.CRANE;
+        }
 
 		// Set selected image on the "Start kran" image
 		if (v.getId() == R.id.ibtnTire || v.getId() == R.id.ibtnSteerWheel
 				|| v.getId() == R.id.ibtnCrane)
 		{
-			Log.i("MainActivity", "------ IMAGEID BUTTONS: " + imageId);
-
 			if (ivMain1.getDrawable() == null)
 			{
-				ivMain1.setImageResource(imageId);
-	public void onClick(View v) {
-		imgCar.setX((float) (fieldArrX[helperX]) - imgCar.getWidth()/2);
-		imgCar.setY((float) (fieldArrY[helperY]) - imgCar.getHeight()/2);
-		
-		if(helperX < 4) 
-		{
-			helperX++;
-		}
-		else 
-		{
-			helperX = 0;
-			
-			if(helperY < 4)
-			helperY++;
-			
-			else helperY = 0;
-		}
-				ivMain1.setTag(imageId);
+                help.setImageAndTag(ivMain1, imageId);
+                // Set the index of the Truck map when you add a object
+                index = 1;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain2.getDrawable() == null)
 			{
-				ivMain2.setImageResource(imageId);
-				ivMain2.setTag(imageId);
-			}
+                help.setImageAndTag(ivMain2, imageId);
+                index = 2;
+                TruckController.getInstance().addObject(index, truckObject);
+            }
 			else if (ivMain3.getDrawable() == null)
 			{
-				ivMain3.setImageResource(imageId);
-				ivMain3.setTag(imageId);
+                help.setImageAndTag(ivMain3, imageId);
+                index = 3;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain4.getDrawable() == null)
 			{
-				ivMain4.setImageResource(imageId);
-				ivMain4.setTag(imageId);
+                help.setImageAndTag(ivMain4, imageId);
+                index = 4;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain5.getDrawable() == null)
 			{
-				ivMain5.setImageResource(imageId);
-				ivMain5.setTag(imageId);
+                help.setImageAndTag(ivMain5, imageId);
+                index = 5;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain6.getDrawable() == null)
 			{
-				ivMain6.setImageResource(imageId);
-				ivMain6.setTag(imageId);
+                help.setImageAndTag(ivMain6, imageId);
+                index = 6;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain7.getDrawable() == null)
 			{
-				ivMain7.setImageResource(imageId);
-				ivMain7.setTag(imageId);
+                help.setImageAndTag(ivMain7, imageId);
+                index = 7;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain8.getDrawable() == null)
 			{
-				ivMain8.setImageResource(imageId);
-				ivMain8.setTag(imageId);
+                help.setImageAndTag(ivMain8, imageId);
+                index = 8;
+                TruckController.getInstance().addObject(index, truckObject);
 			}
 		}
 		// When clicking on an image on the "Start kran" image
 		else
 		{
-			int imageRef = getImageViewId((ImageView) v);
-			Log.i("MainActivity", "------ IMAGEID IMAGES: " + imageRef);
-			
+			int imageRef = help.getImageId((ImageView) v);
+
+            // Set the index of the Truck map, if you don't add a new object, but just change one instead
+            switch (v.getId())
+            {
+                case R.id.imageMain1:
+                    index = 1;
+                    break;
+                case R.id.imageMain2:
+                    index = 2;
+                    break;
+                case R.id.imageMain3:
+                    index = 3;
+                    break;
+                case R.id.imageMain4:
+                    index = 4;
+                    break;
+                case R.id.imageMain5:
+                    index = 5;
+                    break;
+                case R.id.imageMain6:
+                    index = 6;
+                    break;
+                case R.id.imageMain7:
+                    index = 7;
+                    break;
+                case R.id.imageMain8:
+                    index = 8;
+                    break;
+            }
+
 			/*
 			 * creates an intent which, when executed with startActivity, does
 			 * two things:
@@ -231,14 +211,10 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			 */
 			Intent intent = new Intent(this, DisplayCommandoActivity.class);
 			intent.putExtra(EXTRA_IMAGEID, imageRef);
+            intent.putExtra(EXTRA_INDEX, index);
 
 			startActivity(intent);
 		}
-	}
-
-	// Method to get the image from the ImageView
-	public int getImageViewId(ImageView v)
-	{
-		return (Integer) v.getTag();
+        txtView.setText("TRUCK: " + TruckController.getInstance().toString());
 	}
 }

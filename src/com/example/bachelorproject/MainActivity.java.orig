@@ -11,14 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener
-{
-	public final static String EXTRA_IMAGEID = "com.example.bachelorproject.IMAGEREF";
-
-	private ImageButton btnTire, btnSteerWheel, btnCrane;
-	private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
-	private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
-
+<<<<<<< HEAD
+public class MainActivity extends ActionBarActivity implements OnClickListener {
 	ImageButton btnPlay;
 	ImageView imgCar;
 	ImageView imgField;
@@ -33,46 +27,27 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	float xDir;
 	
 	// TESTING //
+=======
+public class MainActivity extends ActionBarActivity implements OnClickListener
+{
+	public final static String EXTRA_IMAGEID = "com.example.bachelorproject.IMAGEREF";
+
+	private ImageButton btnTire, btnSteerWheel, btnCrane;
+	private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
+	private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
+>>>>>>> 57055b902620915aa757e7d23dd7627c65dc4a5c
 
 	int helperX = 0;
 	int helperY = 0;
 	
 	// ------- //
 	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
-		// setContentView(R.layout.activity_main);
-		setContentView(R.layout.activity_main_view);
-
-		// Initialize ImageButtons
-		btnTire = (ImageButton) findViewById(R.id.ibtnTire);
-		btnTire.setOnClickListener(this);
-		btnSteerWheel = (ImageButton) findViewById(R.id.ibtnSteerWheel);
-		btnSteerWheel.setOnClickListener(this);
-		btnCrane = (ImageButton) findViewById(R.id.ibtnCrane);
-		btnCrane.setOnClickListener(this);
-
-		// Initialize ImageViews on the "Start Kran" main
-		ivMain1 = (ImageView) findViewById(R.id.imageMain1);
-		ivMain1.setOnClickListener(this);
-		ivMain2 = (ImageView) findViewById(R.id.imageMain2);
-		ivMain2.setOnClickListener(this);
-		ivMain3 = (ImageView) findViewById(R.id.imageMain3);
-		ivMain3.setOnClickListener(this);
-		ivMain4 = (ImageView) findViewById(R.id.imageMain4);
-		ivMain4.setOnClickListener(this);
-		ivMain5 = (ImageView) findViewById(R.id.imageMain5);
-		ivMain5.setOnClickListener(this);
-		ivMain6 = (ImageView) findViewById(R.id.imageMain6);
-		ivMain6.setOnClickListener(this);
-		ivMain7 = (ImageView) findViewById(R.id.imageMain7);
-		ivMain7.setOnClickListener(this);
-		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
-		ivMain8.setOnClickListener(this);
+<<<<<<< HEAD
+		setContentView(R.layout.activity_main);
 		
 		xDir = 50f;
 		
@@ -121,6 +96,37 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
 			tempHalfTileSize += halfTileSize * 2;
 		}
+=======
+		
+		// setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main_view);
+
+		// Initialize ImageButtons
+		btnTire = (ImageButton) findViewById(R.id.ibtnTire);
+		btnTire.setOnClickListener(this);
+		btnSteerWheel = (ImageButton) findViewById(R.id.ibtnSteerWheel);
+		btnSteerWheel.setOnClickListener(this);
+		btnCrane = (ImageButton) findViewById(R.id.ibtnCrane);
+		btnCrane.setOnClickListener(this);
+
+		// Initialize ImageViews on the "Start Kran" main
+		ivMain1 = (ImageView) findViewById(R.id.imageMain1);
+		ivMain1.setOnClickListener(this);
+		ivMain2 = (ImageView) findViewById(R.id.imageMain2);
+		ivMain2.setOnClickListener(this);
+		ivMain3 = (ImageView) findViewById(R.id.imageMain3);
+		ivMain3.setOnClickListener(this);
+		ivMain4 = (ImageView) findViewById(R.id.imageMain4);
+		ivMain4.setOnClickListener(this);
+		ivMain5 = (ImageView) findViewById(R.id.imageMain5);
+		ivMain5.setOnClickListener(this);
+		ivMain6 = (ImageView) findViewById(R.id.imageMain6);
+		ivMain6.setOnClickListener(this);
+		ivMain7 = (ImageView) findViewById(R.id.imageMain7);
+		ivMain7.setOnClickListener(this);
+		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
+		ivMain8.setOnClickListener(this);
+>>>>>>> 57055b902620915aa757e7d23dd7627c65dc4a5c
 	}
 
 	@Override
@@ -143,23 +149,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	}
 
 	@Override
-	public void onClick(View v)
-	{
-		// Get image ID for the selected button
-		int imageId = 0;
-		if (v.getId() == R.id.ibtnTire) imageId = R.drawable.daek;
-		else if (v.getId() == R.id.ibtnSteerWheel) imageId = R.drawable.rat;
-		else if (v.getId() == R.id.ibtnCrane) imageId = R.drawable.kran;
-
-		// Set selected image on the "Start kran" image
-		if (v.getId() == R.id.ibtnTire || v.getId() == R.id.ibtnSteerWheel
-				|| v.getId() == R.id.ibtnCrane)
-		{
-			Log.i("MainActivity", "------ IMAGEID BUTTONS: " + imageId);
-
-			if (ivMain1.getDrawable() == null)
-			{
-				ivMain1.setImageResource(imageId);
+<<<<<<< HEAD
 	public void onClick(View v) {
 		imgCar.setX((float) (fieldArrX[helperX]) - imgCar.getWidth()/2);
 		imgCar.setY((float) (fieldArrY[helperY]) - imgCar.getHeight()/2);
@@ -177,6 +167,25 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			
 			else helperY = 0;
 		}
+	}
+=======
+	public void onClick(View v)
+	{
+		// Get image ID for the selected button
+		int imageId = 0;
+		if (v.getId() == R.id.ibtnTire) imageId = R.drawable.daek;
+		else if (v.getId() == R.id.ibtnSteerWheel) imageId = R.drawable.rat;
+		else if (v.getId() == R.id.ibtnCrane) imageId = R.drawable.kran;
+
+		// Set selected image on the "Start kran" image
+		if (v.getId() == R.id.ibtnTire || v.getId() == R.id.ibtnSteerWheel
+				|| v.getId() == R.id.ibtnCrane)
+		{
+			Log.i("MainActivity", "------ IMAGEID BUTTONS: " + imageId);
+
+			if (ivMain1.getDrawable() == null)
+			{
+				ivMain1.setImageResource(imageId);
 				ivMain1.setTag(imageId);
 			}
 			else if (ivMain2.getDrawable() == null)
@@ -241,4 +250,5 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 	{
 		return (Integer) v.getTag();
 	}
+>>>>>>> 57055b902620915aa757e7d23dd7627c65dc4a5c
 }
