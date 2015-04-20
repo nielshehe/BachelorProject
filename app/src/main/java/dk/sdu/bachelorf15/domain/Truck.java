@@ -94,6 +94,29 @@ public class Truck
         return commands;
     }
 
+    public Commands getCommand(int index, int mapIndex, TruckObjects truckObject)
+    {
+        Commands com = null;
+
+        if(truck.containsKey(index))
+        {
+            if(truckObject == TruckObjects.TIRE)
+            {
+                com = tire.getCommand(mapIndex);
+            }
+            else if(truckObject == TruckObjects.STEERINGWHEEL)
+            {
+                com = steeringWheel.getCommand(mapIndex);
+            }
+            else if(truckObject == TruckObjects.CRANE)
+            {
+                com = crane.getCommand(mapIndex);
+            }
+        }
+
+        return com;
+    }
+
     public String toString()
     {
         return truck.toString();

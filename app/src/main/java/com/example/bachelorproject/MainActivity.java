@@ -202,6 +202,25 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
                     break;
             }
 
+            // Set the truck object according to the image
+            switch (imageRef)
+            {
+                case R.drawable.daek:
+                    truckObject = TruckObjects.TIRE;
+                    break;
+                case R.drawable.rat:
+                    truckObject = TruckObjects.STEERINGWHEEL;
+                    break;
+                case R.drawable.kran:
+                    truckObject = TruckObjects.CRANE;
+                    break;
+            }
+
+
+            Commands command1 = Truck.getInstance().getCommand(index, 1, truckObject);
+            Commands command2 = Truck.getInstance().getCommand(index, 2, truckObject);
+            Commands command3 = Truck.getInstance().getCommand(index, 3, truckObject);
+
 			/*
 			 * creates an intent which, when executed with startActivity, does
 			 * two things:
@@ -215,8 +234,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			intent.putExtra(EXTRA_IMAGEID, imageRef);
             // Send index for the truck map
             intent.putExtra(EXTRA_INDEX, index);
+            // Send truck object pressed
+            intent.putExtra("TruckObjects", truckObject);
 
-			startActivity(intent);
+            intent.putExtra("commandOne", command1);
+            intent.putExtra("commandTwo", command2);
+            intent.putExtra("commandThree", command3);
+
+            startActivity(intent);
 		}
 
         txtView.setText("TRUCK: " + Truck.getInstance().toString());
