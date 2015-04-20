@@ -7,10 +7,41 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.bachelorproject.MainActivity" >
-
-    <TextView
+    
+    <ImageView
+        android:id="@+id/imageField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="34dp"
+        android:src="@drawable/drivingfield" />
+
+    <ImageView
+        android:id="@+id/imageCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bil" />
+    
+    <ImageButton
+        android:id="@+id/btnPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="53dp"
+        android:layout_marginRight="70dp"
+        android:background="#00FFFFFF"
+        android:onClick="playClick"
+        android:src="@drawable/play" />
+
+    <ImageButton
+        android:id="@+id/btnIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnPlay"
+        android:layout_alignTop="@+id/imageField"
+        android:layout_marginLeft="33dp"
+        android:src="@drawable/icon" />
 
 </RelativeLayout>

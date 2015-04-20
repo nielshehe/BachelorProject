@@ -1647,7 +1647,30 @@ containing a value of this type.
         public static final int abc_textfield_search_activated_mtrl_alpha=0x7f020034;
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020035;
         public static final int abc_textfield_search_material=0x7f020036;
-        public static final int ic_launcher=0x7f020037;
+        public static final int bil=0x7f020037;
+        public static final int daek=0x7f020038;
+        public static final int daekned=0x7f020039;
+        public static final int daekop=0x7f02003a;
+        public static final int drivingfield=0x7f02003b;
+        public static final int ic_launcher=0x7f02003c;
+        public static final int icon=0x7f02003d;
+        public static final int kran=0x7f02003e;
+        public static final int kranhoejre=0x7f02003f;
+        public static final int kranned=0x7f020040;
+        public static final int kranop=0x7f020041;
+        public static final int kranvenstre=0x7f020042;
+        public static final int levelfive=0x7f020043;
+        public static final int levelfour=0x7f020044;
+        public static final int levelone=0x7f020045;
+        public static final int levelsix=0x7f020046;
+        public static final int levelthree=0x7f020047;
+        public static final int leveltwo=0x7f020048;
+        public static final int play=0x7f020049;
+        public static final int rat=0x7f02004a;
+        public static final int rathoejre=0x7f02004b;
+        public static final int ratvenstre=0x7f02004c;
+        public static final int startmain=0x7f02004d;
+        public static final int tile=0x7f02004e;
     }
     public static final class id {
         public static final int action_bar=0x7f050031;
@@ -1663,10 +1686,12 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f05002e;
         public static final int action_mode_bar_stub=0x7f05002d;
         public static final int action_mode_close_button=0x7f050020;
-        public static final int action_settings=0x7f05003f;
+        public static final int action_settings=0x7f050043;
         public static final int activity_chooser_view_content=0x7f050021;
         public static final int always=0x7f05000d;
         public static final int beginning=0x7f050012;
+        public static final int btnIcon=0x7f050042;
+        public static final int btnPlay=0x7f050041;
         public static final int checkbox=0x7f050029;
         public static final int collapseActionView=0x7f05000f;
         public static final int decor_content_parent=0x7f05002f;
@@ -1683,6 +1708,8 @@ containing a value of this type.
         public static final int icon=0x7f050026;
         public static final int ifRoom=0x7f05000c;
         public static final int image=0x7f050023;
+        public static final int imageCar=0x7f050040;
+        public static final int imageField=0x7f05003f;
         public static final int listMode=0x7f050002;
         public static final int list_item=0x7f050025;
         public static final int middle=0x7f050013;
