@@ -1,6 +1,7 @@
 package com.example.bachelorproject;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -19,6 +20,8 @@ import dk.sdu.bachelorf15.help.TruckObjects;
 public class MainActivity extends ActionBarActivity implements OnClickListener
 {
     private ImageButton btnTire, btnSteerWheel, btnCrane;
+    private ImageButton btnPlay;
+    private ImageView imgCar, imgField;
     private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
     private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
 
@@ -34,8 +37,21 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
     private Helper help = new Helper();
 
-    // TODO REMOVE ONLY TO TEST TRUCK AND MAP
-    private TextView txtView;
+    //Variables for the tiles
+    private final int numberOfTiles = 5;
+    private double halfTileSize;
+
+    private double[] fieldArrX = new double[numberOfTiles];
+    private double[] fieldArrY = new double[numberOfTiles];
+
+    private float xDir;
+
+    // TESTING //
+
+    private int helperX = 0;
+    private int helperY = 0;
+
+    // ------- //
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +60,20 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
 		setContentView(R.layout.activity_main);
 
+        xDir = 50f;
+
+        imgCar = (ImageView) findViewById(R.id.imageCar);
+        imgField = (ImageView) findViewById(R.id.imageField);
+
+        btnPlay = (ImageButton) findViewById(R.id.btnPlay);
+        btnPlay.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPlayClick(v);
+            }
+        });
+
+        // Images and buttons for the "Start kran" main
 		// Initialize ImageButtons
 		btnTire = (ImageButton) findViewById(R.id.ibtnTire);
 		btnTire.setOnClickListener(this);
@@ -69,9 +99,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 		ivMain7.setOnClickListener(this);
 		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
 		ivMain8.setOnClickListener(this);
-
-        // TODO TEST TRUCK AND MAP
-        txtView = (TextView) findViewById(R.id.textView);
 	}
 
 	@Override
@@ -92,6 +119,49 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 		if (id == R.id.action_settings) { return true; }
 		return super.onOptionsItemSelected(item);
 	}
+
+    public void onWindowFocusChanged(boolean hasFocus)
+    {
+        super.onWindowFocusChanged(hasFocus);
+
+        initFieldArray();
+    }
+
+    public void initFieldArray()
+    {
+        halfTileSize = imgField.getWidth() / numberOfTiles / 2;
+
+        double startX = imgField.getLeft();
+        double startY = imgField.getTop();
+        double tempHalfTileSize = halfTileSize;
+
+        for(int n = 0; n < numberOfTiles; n++)
+        {
+            fieldArrX[n] = startX + tempHalfTileSize;
+            fieldArrY[n] = startY + tempHalfTileSize;
+
+            tempHalfTileSize += halfTileSize * 2;
+        }
+    }
+
+    public void onPlayClick(View v)
+    {
+        imgCar.setX((float) (fieldArrX[helperX]) - imgCar.getWidth()/2);
+        imgCar.setY((float) (fieldArrY[helperY]) - imgCar.getHeight()/2);
+
+        if(helperX < 4)
+        {
+            helperX++;
+        } else
+        {
+            helperX = 0;
+
+            if(helperY < 4)
+                helperY++;
+            else helperY = 0;
+
+        }
+    }
 
 	@Override
 	public void onClick(View v)
@@ -168,14 +238,24 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
                 Truck.getInstance().addObject(index, truckObject);
 			}
 		}
-		// When clicking on an image on the "Start kran" image
-		else
-		{
-			int imageRef = help.getImageId((ImageView) v);
+        else {
+            int imageRef = help.getImageId((ImageView) v);
+
+            // Set the truck object according to the image
+            switch (imageRef) {
+                case R.drawable.daek:
+                    truckObject = TruckObjects.TIRE;
+                    break;
+                case R.drawable.rat:
+                    truckObject = TruckObjects.STEERINGWHEEL;
+                    break;
+                case R.drawable.kran:
+                    truckObject = TruckObjects.CRANE;
+                    break;
+            }
 
             // Set the index of the Truck map, if you don't add a new object, but just change one instead
-            switch (v.getId())
-            {
+            switch (v.getId()) {
                 case R.id.imageMain1:
                     index = 1;
                     break;
@@ -202,21 +282,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
                     break;
             }
 
-            // Set the truck object according to the image
-            switch (imageRef)
-            {
-                case R.drawable.daek:
-                    truckObject = TruckObjects.TIRE;
-                    break;
-                case R.drawable.rat:
-                    truckObject = TruckObjects.STEERINGWHEEL;
-                    break;
-                case R.drawable.kran:
-                    truckObject = TruckObjects.CRANE;
-                    break;
-            }
-
-
             Commands command1 = Truck.getInstance().getCommand(index, 1, truckObject);
             Commands command2 = Truck.getInstance().getCommand(index, 2, truckObject);
             Commands command3 = Truck.getInstance().getCommand(index, 3, truckObject);
@@ -229,9 +294,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			 * It passes imageId (= the user input) into the activity, tagged
 			 * with the string content of EXTRA_IMAGEID
 			 */
-			Intent intent = new Intent(this, DisplayCommandActivity.class);
+            Intent intent = new Intent(this, DisplayCommandActivity.class);
             // Send int for which images is pressed to DisplayCommandActivity
-			intent.putExtra(EXTRA_IMAGEID, imageRef);
+            intent.putExtra(EXTRA_IMAGEID, imageRef);
             // Send index for the truck map
             intent.putExtra(EXTRA_INDEX, index);
             // Send truck object pressed
@@ -242,8 +307,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
             intent.putExtra("commandThree", command3);
 
             startActivity(intent);
-		}
-
-        txtView.setText("TRUCK: " + Truck.getInstance().toString());
+        }
 	}
 }
