@@ -44,17 +44,9 @@ public class Truck
         truckCommands[objectIndex][commandIndex] = command;
     }
 
-    public void seeCommands()
+    public Commands getCommands(int truckObjectIndex, int commandIndex)
     {
-        for(int o = 0; o <= 7; o++)
-        {
-            System.out.println("---Truck object at index " + o + "---");
-
-            for(int c = 0; c <= 2; c++)
-            {
-                System.out.println("Truck command: " + truckCommands[o][c]);
-            }
-        }
+        return truckCommands[truckObjectIndex][commandIndex];
     }
 
     public void addObject(int mapIndex, TruckObjects obj)
@@ -95,35 +87,6 @@ public class Truck
         }
     }
 
-    public Commands[] getCommands(int index, TruckObjects truckObject)
-    {
-        Commands[] commands = new Commands[3];
-        int arrayIndex = 0;
-
-        if(truck.containsKey(index))
-        {
-            for(int i = 1; i <= 3; i++)
-            {
-                if(truckObject == TruckObjects.TIRE)
-                {
-                    commands[arrayIndex] = tire.getCommand(i);
-                    arrayIndex++;
-                }
-                else if(truckObject == TruckObjects.STEERINGWHEEL)
-                {
-                    commands[arrayIndex] = steeringWheel.getCommand(i);
-                    arrayIndex++;
-                }
-                else if(truckObject == TruckObjects.CRANE)
-                {
-                    commands[arrayIndex] = crane.getCommand(i);
-                    arrayIndex++;
-                }
-            }
-        }
-        return commands;
-    }
-
     public Commands getCommand(int index, int mapIndex, TruckObjects truckObject)
     {
         Commands com = truckCommands[index][mapIndex];
@@ -133,25 +96,6 @@ public class Truck
     public String toString()
     {
         return truck.toString();
-    }
-
-    public HashMap[] getTruckCommands()
-    {
-        HashMap a[] = new HashMap[100];
-        int count = 0;
-
-        for(int i=0; i<8; i++)
-        {
-            for(int d=0; d<3; d++)
-            {
-                System.out.println(truck.get(d));
-                a[count] = truck.get(d);
-
-                count++;
-            }
-        }
-
-        return null;
     }
 
     // TODO REMOVE UNUSED

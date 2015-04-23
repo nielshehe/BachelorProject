@@ -3,6 +3,7 @@ package com.example.bachelorproject;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.provider.SyncStateContract;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 import dk.sdu.bachelorf15.domain.Tire;
 import dk.sdu.bachelorf15.domain.Truck;
@@ -48,14 +50,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
     private double[] fieldArrX = new double[numberOfTiles];
     private double[] fieldArrY = new double[numberOfTiles];
 
-    private float xDir;
+    private int currentX;
+    private int currentY;
 
-    // TESTING //
-
-    private int helperX = 0;
-    private int helperY = 0;
-
-    // ------- //
+    private String[] carOrientations = {"north", "east", "south", "west"};
+    private String carOrientation;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -64,9 +63,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
 		setContentView(R.layout.activity_main);
 
-        xDir = 50f;
-
-        imgCar = (ImageView) findViewById(R.id.imageCar);
         imgField = (ImageView) findViewById(R.id.imageField);
 
         btnPlay = (ImageButton) findViewById(R.id.btnPlay);
@@ -103,6 +99,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 		ivMain7.setOnClickListener(this);
 		ivMain8 = (ImageView) findViewById(R.id.imageMain8);
 		ivMain8.setOnClickListener(this);
+
+
+        // Initializing car, position and orientation
+        currentX = 3;
+        currentY = 3;
+
+        // NB: Direcction skal være mellem 0-3
+        int direction = 1;
+        setOrientation(direction);
 	}
 
 	@Override
@@ -129,6 +134,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
         super.onWindowFocusChanged(hasFocus);
 
         initFieldArray();
+        initCar();
     }
 
     public void initFieldArray()
@@ -150,25 +156,89 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
     public void onPlayClick(View v)
     {
-        /*imgCar.setX((float) (fieldArrX[helperX]) - imgCar.getWidth()/2);
-        imgCar.setY((float) (fieldArrY[helperY]) - imgCar.getHeight()/2);
-
-        if(helperX < 4)
+        for(int truckObject = 0; truckObject <= 7; truckObject++)
         {
-            helperX++;
-        } else
+            for(int truckCommand = 0; truckCommand <= 2; truckCommand++)
+            {
+                Commands command = Truck.getInstance().getCommands(truckObject, truckCommand);
+
+            //  System.out.println("---------------------------Printing collection---------------------------");
+            //  System.out.println(command);
+            //  System.out.println("---------------------------END OF COLLECTION---------------------------");
+
+                if(command == Commands.TIRE_MOVE_FORWARD) moveCar(1);
+                else if(command == Commands.TIRE_MOVE_BACKWARD) moveCar(-1);
+                else if(command == Commands.STEER_TURN_RIGHT) rotateCar(1);
+                else if(command == Commands.STEER_TURN_LEFT) rotateCar(-1);
+            }
+        }
+    }
+
+    public void initCar()
+    {
+        imgCar = (ImageView) findViewById(R.id.imageCar);
+
+        //if(direction > 0) imgCar.setRotation(imgCar.getRotation() + 90 * (direction - 1));
+        //else imgCar.setRotation(imgCar.getRotation() + 90 * 3);
+
+        imgCar.setX((float)fieldArrX[currentX] - imgCar.getWidth()/2);
+        imgCar.setY((float)fieldArrY[currentY] - imgCar.getHeight()/2);
+
+        System.out.println("Starting orientation: " + getOrientation());
+    }
+
+    public void rotateCar(int rotation)
+    {
+        for(int o = 0; o <= 3; o++)
         {
-            helperX = 0;
+            int currentOr = o;
 
-            if(helperY < 4)
-                helperY++;
-            else helperY = 0;
+            if(carOrientations[o] == getOrientation())
+            {
+                if(o == 0 && rotation == -1) setOrientation(3);
+                else if(o == 3 && rotation == 1) setOrientation(0);
+                else setOrientation(o + rotation);
 
-        }*/
+                imgCar.setRotation(imgCar.getRotation() + rotation * 90);
 
-        System.out.println("---------------------------Printing collection---------------------------");
-        Truck.getInstance().seeCommands();
-        System.out.println("---------------------------END OF COLLECTION---------------------------");
+                System.out.println("------------ ORIENTATION: " + getOrientation() + "----------------");
+                return;
+            }
+        }
+    }
+
+    public void moveCar(int move)
+    {
+        String orientation = getOrientation();
+
+        switch (orientation) {
+            case "north":
+                currentY -= move;
+                imgCar.setY((float)fieldArrY[currentY] - imgCar.getHeight()/2 + move);
+                break;
+            case "east":
+                currentX += move;
+                imgCar.setX((float) fieldArrX[currentX] - imgCar.getWidth()/2 + move);
+                break;
+            case "south":
+                currentY += move;
+                imgCar.setY((float)fieldArrY[currentY] - imgCar.getHeight()/2 + move);
+                break;
+            case "west":
+                currentX -= move;
+                imgCar.setX((float) fieldArrX[currentX] - imgCar.getWidth()/2 + move);
+                break;
+        }
+    }
+
+    public void setOrientation(int orientation)
+    {
+        carOrientation = carOrientations[orientation];
+    }
+
+    public String getOrientation()
+    {
+        return carOrientation;
     }
 
 	@Override
@@ -264,9 +334,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
             // Set the index of the Truck map, if you don't add a new object, but just change one instead
             switch (v.getId()) {
-                case R.id.imageMain1:
-                    index = 0;
-                    break;
+                    case R.id.imageMain1:
+                        index = 0;
+                        break;
                 case R.id.imageMain2:
                     index = 1;
                     break;
