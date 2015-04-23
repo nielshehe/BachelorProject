@@ -12,6 +12,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import dk.sdu.bachelorf15.domain.Tire;
 import dk.sdu.bachelorf15.domain.Truck;
 import dk.sdu.bachelorf15.help.Commands;
 import dk.sdu.bachelorf15.help.Helper;
@@ -146,7 +150,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 
     public void onPlayClick(View v)
     {
-        imgCar.setX((float) (fieldArrX[helperX]) - imgCar.getWidth()/2);
+        /*imgCar.setX((float) (fieldArrX[helperX]) - imgCar.getWidth()/2);
         imgCar.setY((float) (fieldArrY[helperY]) - imgCar.getHeight()/2);
 
         if(helperX < 4)
@@ -160,7 +164,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
                 helperY++;
             else helperY = 0;
 
-        }
+        }*/
+
+        System.out.println("---------------------------Printing collection---------------------------");
+        Truck.getInstance().seeCommands();
+        System.out.println("---------------------------END OF COLLECTION---------------------------");
     }
 
 	@Override
@@ -192,49 +200,49 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 			{
                 help.setImageAndTag(ivMain1, imageId);
                 // Set the index of the Truck map when you add a object
-                index = 1;
+                index = 0;
                 Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain2.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain2, imageId);
-                index = 2;
+                index = 1;
                 Truck.getInstance().addObject(index, truckObject);
             }
 			else if (ivMain3.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain3, imageId);
-                index = 3;
+                index = 2;
                 Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain4.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain4, imageId);
-                index = 4;
+                index = 3;
                 Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain5.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain5, imageId);
-                index = 5;
+                index = 4;
                 Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain6.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain6, imageId);
-                index = 6;
+                index = 5;
                 Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain7.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain7, imageId);
-                index = 7;
+                index = 6;
                 Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain8.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain8, imageId);
-                index = 8;
+                index = 7;
                 Truck.getInstance().addObject(index, truckObject);
 			}
 		}
@@ -257,34 +265,35 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
             // Set the index of the Truck map, if you don't add a new object, but just change one instead
             switch (v.getId()) {
                 case R.id.imageMain1:
-                    index = 1;
+                    index = 0;
                     break;
                 case R.id.imageMain2:
-                    index = 2;
+                    index = 1;
                     break;
                 case R.id.imageMain3:
-                    index = 3;
+                    index = 2;
                     break;
                 case R.id.imageMain4:
-                    index = 4;
+                    index = 3;
                     break;
                 case R.id.imageMain5:
-                    index = 5;
+                    index = 4;
                     break;
                 case R.id.imageMain6:
-                    index = 6;
+                    index = 5;
                     break;
                 case R.id.imageMain7:
-                    index = 7;
+                    index = 6;
                     break;
                 case R.id.imageMain8:
-                    index = 8;
+                    index = 7;
                     break;
             }
 
-            Commands command1 = Truck.getInstance().getCommand(index, 1, truckObject);
-            Commands command2 = Truck.getInstance().getCommand(index, 2, truckObject);
-            Commands command3 = Truck.getInstance().getCommand(index, 3, truckObject);
+            Commands command1 = Truck.getInstance().getCommand(index, 0, truckObject);
+            Commands command2 = Truck.getInstance().getCommand(index, 1, truckObject);
+            Commands command3 = Truck.getInstance().getCommand(index, 2, truckObject);
+
 
 			/*
 			 * creates an intent which, when executed with startActivity, does

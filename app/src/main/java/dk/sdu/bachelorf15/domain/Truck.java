@@ -1,6 +1,8 @@
 package dk.sdu.bachelorf15.domain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +22,40 @@ public class Truck
         return instance;
     }
 
-    private HashMap<Integer, HashMap<Integer, Commands>> truck = new HashMap<>();
+   private HashMap<Integer, HashMap<Integer, Commands>> truck = new HashMap<>();
     private static final int MAX_LENGTH = 8;
+
+    private Commands[][] truckCommands;
+
+    private static final int MAX_OBJECT_LENGTH = 8;
+    private static final int MAX_COMMAND_LENGTH = 3;
 
     private Tire tire;
     private SteeringWheel steeringWheel;
     private Crane crane;
+
+    public Truck()
+    {
+        truckCommands = new Commands[MAX_OBJECT_LENGTH][MAX_COMMAND_LENGTH];
+    }
+
+    public void addCommand(int objectIndex, int commandIndex, Commands command)
+    {
+        truckCommands[objectIndex][commandIndex] = command;
+    }
+
+    public void seeCommands()
+    {
+        for(int o = 0; o <= 7; o++)
+        {
+            System.out.println("---Truck object at index " + o + "---");
+
+            for(int c = 0; c <= 2; c++)
+            {
+                System.out.println("Truck command: " + truckCommands[o][c]);
+            }
+        }
+    }
 
     public void addObject(int mapIndex, TruckObjects obj)
     {
@@ -96,30 +126,32 @@ public class Truck
 
     public Commands getCommand(int index, int mapIndex, TruckObjects truckObject)
     {
-        Commands com = null;
-
-        if(truck.containsKey(index))
-        {
-            if(truckObject == TruckObjects.TIRE)
-            {
-                com = tire.getCommand(mapIndex);
-            }
-            else if(truckObject == TruckObjects.STEERINGWHEEL)
-            {
-                com = steeringWheel.getCommand(mapIndex);
-            }
-            else if(truckObject == TruckObjects.CRANE)
-            {
-                com = crane.getCommand(mapIndex);
-            }
-        }
-
+        Commands com = truckCommands[index][mapIndex];
         return com;
     }
 
     public String toString()
     {
         return truck.toString();
+    }
+
+    public HashMap[] getTruckCommands()
+    {
+        HashMap a[] = new HashMap[100];
+        int count = 0;
+
+        for(int i=0; i<8; i++)
+        {
+            for(int d=0; d<3; d++)
+            {
+                System.out.println(truck.get(d));
+                a[count] = truck.get(d);
+
+                count++;
+            }
+        }
+
+        return null;
     }
 
     // TODO REMOVE UNUSED

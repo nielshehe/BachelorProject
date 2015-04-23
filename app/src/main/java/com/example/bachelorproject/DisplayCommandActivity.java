@@ -219,17 +219,20 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
             if (ivCommandoMain1.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain1, imageId);
-                Truck.getInstance().addCommand(mapIndex, 1 , truckObject, command);
+            //    Truck.getInstance().addCommand(mapIndex, 1 , truckObject, command);
+                Truck.getInstance().addCommand(mapIndex, 0, command);
             }
             else if (ivCommandoMain2.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain2, imageId);
-                    Truck.getInstance().addCommand(mapIndex, 2,  truckObject, command);
+            //        Truck.getInstance().addCommand(mapIndex, 2,  truckObject, command);
+                Truck.getInstance().addCommand(mapIndex, 1, command);
             }
                 else if (ivCommandoMain3.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain3, imageId);
-                Truck.getInstance().addCommand(mapIndex, 3, truckObject, command);
+            //    Truck.getInstance().addCommand(mapIndex, 3, truckObject, command);
+                Truck.getInstance().addCommand(mapIndex, 2, command);
             }
         }
         txtView1.setText("TRUCKOBJECT: " + truckObject + " COMMAND: " + command);
@@ -300,11 +303,12 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
                 btnCommando4.setImageResource(R.drawable.kranhoejre);
             }
 
-            // TODO NOT WORKING CORRECT
+
+           // TODO NOT WORKING CORRECT
             // Set images for commands on the ivObjectMain if there are commands in the map
-            commandOne = Truck.getInstance().getCommand(mapIndex, 1, truckObject);
-            commandTwo = Truck.getInstance().getCommand(mapIndex, 2, truckObject);
-            commandThree = Truck.getInstance().getCommand(mapIndex, 3, truckObject);
+            commandOne = Truck.getInstance().getCommand(mapIndex, 0, truckObject);
+            commandTwo = Truck.getInstance().getCommand(mapIndex, 1, truckObject);
+            commandThree = Truck.getInstance().getCommand(mapIndex, 2, truckObject);
 
             if(commandOne != null)
             {
@@ -318,7 +322,6 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
             {
                 ivCommandoMain3.setImageResource(getCommandImage(commandThree));
             }
-
             // TODO REMOVE ONLY TO TEST TRUCK MAP
             txtView1 = (TextView) findViewById(R.id.textView2);
             txtView1.setText("INDEX: " + mapIndex
