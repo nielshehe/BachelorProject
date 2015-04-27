@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -19,6 +21,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
 {
     private ImageButton btnTire, btnSteerWheel, btnCrane;
     private ImageButton btnPlay;
+    private ImageButton btnTrash;
     private ImageView imgCar, imgField;
     private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
     private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
@@ -45,6 +48,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
     private String[] carOrientations = {"north", "east", "south", "west"};
     private String carOrientation;
 
+    private int animationDuration = 1000;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -59,6 +64,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
             @Override
             public void onClick(View v) {
                 onPlayClick(v);
+            }
+        });
+
+        btnTrash = (ImageButton) findViewById(R.id.ibtnTrash);
+        btnTrash.setOnClickListener(new OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                onTrashClick(v);
             }
         });
 
@@ -379,4 +393,18 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
             startActivity(intent);
         }
 	}
+
+    private void onTrashClick(View v)
+    {
+        Truck.getInstance().clearCommands();
+
+        help.setImageAndTag(ivMain1, 0);
+        help.setImageAndTag(ivMain2, 0);
+        help.setImageAndTag(ivMain3, 0);
+        help.setImageAndTag(ivMain4, 0);
+        help.setImageAndTag(ivMain5, 0);
+        help.setImageAndTag(ivMain6, 0);
+        help.setImageAndTag(ivMain7, 0);
+        help.setImageAndTag(ivMain8, 0);
+    }
 }

@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import dk.sdu.bachelorf15.domain.Truck;
+
 
 public class MainLevelActivity extends ActionBarActivity implements View.OnClickListener
 {
@@ -108,5 +110,11 @@ public class MainLevelActivity extends ActionBarActivity implements View.OnClick
         intent.putExtra(CAR_START_Y, carPosY);
 
         startActivity(intent);
+    }
+
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        Truck.getInstance().clearCommands();
     }
 }

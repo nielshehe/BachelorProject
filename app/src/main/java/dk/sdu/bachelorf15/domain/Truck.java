@@ -3,6 +3,7 @@ package dk.sdu.bachelorf15.domain;
 import java.util.HashMap;
 
 import dk.sdu.bachelorf15.help.Commands;
+import dk.sdu.bachelorf15.help.Helper;
 import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class Truck
@@ -75,5 +76,16 @@ public class Truck
     public String toString()
     {
         return truck.toString();
+    }
+
+    public void clearCommands()
+    {
+        for(int o = 0; o < MAX_OBJECT_LENGTH; o++)
+        {
+            for(int c = 0; c < MAX_COMMAND_LENGTH; c++)
+            {
+                truckCommands[o][c] = null;
+            }
+        }
     }
 }
