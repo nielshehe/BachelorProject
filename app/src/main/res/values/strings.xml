@@ -6,5 +6,6 @@
     <string name="title_commando_view">Commando view</string>
     <string name="title_activity_display_commando">Commando view</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_main_level">MainLevelActivity</string>
 
 </resources>
