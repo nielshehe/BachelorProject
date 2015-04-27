@@ -30,20 +30,14 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
     private Commands command;
 
     // Variables if there is commands in the map
-    private Commands[] foundCommands;
     private Commands commandOne;
     private Commands commandTwo;
     private Commands commandThree;
-
-
-    // TODO REMOVE ONLY TO TEST TRUCK MAP
-    private TextView txtView1;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_display_command);
 
 		// Set the activity to only fill half the screen
@@ -69,72 +63,6 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
         btnCommando3.setOnClickListener(this);
         btnCommando4 = (ImageButton) findViewById(R.id.imagebtnCommando4);
         btnCommando4.setOnClickListener(this);
-
-		/*
-		 * It reads the value that was set for EXTRA_IMAGEID in the intent used
-		 * to start the activity.
-		 * Hence, imageID now contains the user-selected value
-		 * (or the R.drawable.startmain if the activity is started through
-		 * a different intent which did not set EXTRA_IMAGEID)
-		 */
-/*		Intent intent = getIntent();
-		int imageRef = intent.getIntExtra(MainActivity.EXTRA_IMAGEID,
-				R.drawable.startmain);
-        mapIndex = intent.getIntExtra(MainActivity.EXTRA_INDEX, 1);
-        truckObject = (TruckObjects) intent.getSerializableExtra("TruckObjects");
-
-
-        // TODO
-        commandOne = (Commands) intent.getSerializableExtra("commandOne");
-        commandTwo = (Commands) intent.getSerializableExtra("commandTwo");
-        commandThree = (Commands) intent.getSerializableExtra("commandThree");
-
-        // Set images on the command image buttons
-		if (truckObject == TruckObjects.TIRE)
-        {
-            help.setImageAndTag(ivObjectMain, R.drawable.daekmain);
-            btnCommando1.setImageResource(R.drawable.daekop);
-            btnCommando2.setImageResource(R.drawable.daekned);
-        }
-		else if (truckObject == TruckObjects.STEERINGWHEEL)
-        {
-            help.setImageAndTag(ivObjectMain, R.drawable.ratmain);
-            btnCommando1.setImageResource(R.drawable.ratvenstre);
-            btnCommando2.setImageResource(R.drawable.rathoejre);
-        }
-		else if (truckObject == TruckObjects.CRANE)
-        {
-            help.setImageAndTag(ivObjectMain, R.drawable.kranmain);
-            btnCommando1.setImageResource(R.drawable.kranvenstre);
-            btnCommando2.setImageResource(R.drawable.kranop);
-            btnCommando3.setImageResource(R.drawable.kranned);
-            btnCommando4.setImageResource(R.drawable.kranhoejre);
-        }
-
-        // Set images for commands on the ivObjectMain if there are commands in the map
-        // TODO GET COMMANDS
-        //getCommands(mapIndex, truckObject);
-        if(commandOne != null)
-        {
-            ivCommandoMain1.setImageResource(getCommandImage(commandOne));
-        }
-        if(commandTwo != null)
-        {
-            ivCommandoMain2.setImageResource(getCommandImage(commandTwo));
-        }
-        if(commandThree != null)
-        {
-            ivCommandoMain3.setImageResource(getCommandImage(commandThree));
-        }
-
-        // TODO REMOVE ONLY TO TEST TRUCK MAP
-        txtView1 = (TextView) findViewById(R.id.textView2);
-        txtView1.setText("INDEX: " + mapIndex
-                + "\nTRUCKOBJECT: " + truckObject
-                + "\nCOMMAND1: " + commandOne
-                + "\nCOMMAND2: " + commandTwo
-                + "\nCOMMAND3: " + commandThree);
-*/
 	}
 
 	@Override
@@ -219,23 +147,19 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
             if (ivCommandoMain1.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain1, imageId);
-            //    Truck.getInstance().addCommand(mapIndex, 1 , truckObject, command);
                 Truck.getInstance().addCommand(mapIndex, 0, command);
             }
             else if (ivCommandoMain2.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain2, imageId);
-            //        Truck.getInstance().addCommand(mapIndex, 2,  truckObject, command);
                 Truck.getInstance().addCommand(mapIndex, 1, command);
             }
                 else if (ivCommandoMain3.getDrawable() == null)
             {
                 help.setImageAndTag(ivCommandoMain3, imageId);
-            //    Truck.getInstance().addCommand(mapIndex, 3, truckObject, command);
                 Truck.getInstance().addCommand(mapIndex, 2, command);
             }
         }
-        txtView1.setText("TRUCKOBJECT: " + truckObject + " COMMAND: " + command);
     }
 
     public int getCommandImage(Commands com)
@@ -277,6 +201,13 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
 
         if(hasFocus)
         {
+            /*
+		    * It reads the value that was set for EXTRA_INDEX in the intent used
+		    * to start the activity.
+		    * Hence, imageID now contains the user-selected value
+		    * (or 1 if the activity is started through
+		    * a different intent which did not set EXTRA_INDEX)
+		    */
             Intent intent = getIntent();
             mapIndex = intent.getIntExtra(MainActivity.EXTRA_INDEX, 1);
             truckObject = (TruckObjects) intent.getSerializableExtra("TruckObjects");
@@ -303,8 +234,6 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
                 btnCommando4.setImageResource(R.drawable.kranhoejre);
             }
 
-
-           // TODO NOT WORKING CORRECT
             // Set images for commands on the ivObjectMain if there are commands in the map
             commandOne = Truck.getInstance().getCommand(mapIndex, 0, truckObject);
             commandTwo = Truck.getInstance().getCommand(mapIndex, 1, truckObject);
@@ -322,13 +251,6 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
             {
                 ivCommandoMain3.setImageResource(getCommandImage(commandThree));
             }
-            // TODO REMOVE ONLY TO TEST TRUCK MAP
-            txtView1 = (TextView) findViewById(R.id.textView2);
-            txtView1.setText("INDEX: " + mapIndex
-                    + "\nTRUCKOBJECT: " + truckObject
-                    + "\nCOMMAND1: " + commandOne
-                    + "\nCOMMAND2: " + commandTwo
-                    + "\nCOMMAND3: " + commandThree);
         }
     }
 }

@@ -1,12 +1,7 @@
 package dk.sdu.bachelorf15.domain;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
-import dk.sdu.bachelorf15.help.CommandInterface;
 import dk.sdu.bachelorf15.help.Commands;
 import dk.sdu.bachelorf15.help.TruckObjects;
 
@@ -22,7 +17,7 @@ public class Truck
         return instance;
     }
 
-   private HashMap<Integer, HashMap<Integer, Commands>> truck = new HashMap<>();
+    private HashMap<Integer, HashMap<Integer, Commands>> truck = new HashMap<>();
     private static final int MAX_LENGTH = 8;
 
     private Commands[][] truckCommands;
@@ -71,22 +66,6 @@ public class Truck
         }
     }
 
-    public void addCommand(int truckIndex, int commandIndex, TruckObjects truckObjects, Commands com)
-    {
-        HashMap<Integer, Commands> map = truck.get(truckIndex);
-
-        if(truckObjects == TruckObjects.TIRE)
-        {
-            tire.addCommand(commandIndex, map, com);
-        } else if(truckObjects == TruckObjects.STEERINGWHEEL)
-        {
-            steeringWheel.addCommand(commandIndex, map, com);
-        } else if(truckObjects == TruckObjects.CRANE)
-        {
-            crane.addCommand(commandIndex, map, com);
-        }
-    }
-
     public Commands getCommand(int index, int mapIndex, TruckObjects truckObject)
     {
         Commands com = truckCommands[index][mapIndex];
@@ -97,56 +76,4 @@ public class Truck
     {
         return truck.toString();
     }
-
-    // TODO REMOVE UNUSED
-    private int index = 1;
-
-    // TODO REMOVE UNUSED
-    /*public void addObject(TruckObjects obj)
-    {
-        if(index <= MAX_LENGTH)
-        {
-            if(obj == TruckObjects.TIRE)
-            {
-                tire = new Tire();
-                truck.put(index, tire.getTireMap());
-                //Tire t = new Tire();
-                //truck.put(index, t.getTireMap());
-                index++;
-            }
-            else if (obj == TruckObjects.STEERINGWHEEL)
-            {
-                steeringWheel = new SteeringWheel();
-                truck.put(index, steeringWheel.getSteeringMap());
-                //SteeringWheel s = new SteeringWheel();
-                //truck.put(index, s.getSteeringMap());
-                index++;
-            }
-            else if(obj == TruckObjects.CRANE)
-            {
-                crane = new Crane();
-                truck.put(index, crane.getCraneMap());
-                //Crane c = new Crane();
-                //truck.put(index, c.getCraneMap());
-                index++;
-            }
-        }
-    }*/
-
-    /*public void addCommand(int i, TruckObjects truckObjects, Commands com)
-    {
-        // TODO GET THE MAP VALUE AND ADD A COMMAND TO IT
-        HashMap<Integer, Commands> map = truck.get(i);
-
-        if(truckObjects == TruckObjects.TIRE)
-        {
-            tire.addCommand(map, com);
-        } else if(truckObjects == TruckObjects.STEERINGWHEEL)
-        {
-            steeringWheel.addCommand(map, com);
-        } else if(truckObjects == TruckObjects.CRANE)
-        {
-            crane.addCommand(map, com);
-        }
-    }*/
 }
