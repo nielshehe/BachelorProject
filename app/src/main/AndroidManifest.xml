@@ -40,6 +40,15 @@
                 android:value="com.example.bachelorproject.MainActivity" />
         </activity>
         <activity
+            android:name=".DisplayInfoActivity"
+            android:label="@string/title_activity_display_info"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.bachelorproject.MainActivity" />
+        </activity>
+        <activity
             android:name=".MainLevelActivity"
             android:label="@string/title_activity_main_level"
             android:screenOrientation="landscape">

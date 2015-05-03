@@ -7,8 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -22,6 +20,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
     private ImageButton btnTire, btnSteerWheel, btnCrane;
     private ImageButton btnPlay;
     private ImageButton btnTrash;
+    private ImageButton btnInfo;
     private ImageView imgCar, imgField;
     private ImageView ivMain1, ivMain2, ivMain3, ivMain4;
     private ImageView ivMain5, ivMain6, ivMain7, ivMain8;
@@ -64,6 +63,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
             @Override
             public void onClick(View v) {
                 onPlayClick(v);
+            }
+        });
+
+        btnInfo = (ImageButton) findViewById(R.id.ibtnInfo);
+        btnInfo.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onInfoClicked(v);
             }
         });
 
@@ -406,5 +413,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
         help.setImageAndTag(ivMain6, 0);
         help.setImageAndTag(ivMain7, 0);
         help.setImageAndTag(ivMain8, 0);
+    }
+
+    private void onInfoClicked(View v)
+    {
+        Intent intent = new Intent(this, DisplayInfoActivity.class);
+
+        startActivity(intent);
     }
 }

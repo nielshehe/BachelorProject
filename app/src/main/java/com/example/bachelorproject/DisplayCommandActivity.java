@@ -71,7 +71,7 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
 		// Inflate the menu; this adds items to the action bar if it is present.
 		// getMenuInflater().inflate(R.menu.display_commando, menu);
 		return true;
-	}
+}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
