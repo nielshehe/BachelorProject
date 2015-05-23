@@ -235,9 +235,9 @@ public class DisplayCommandActivity extends ActionBarActivity implements View.On
             }
 
             // Set images for commands on the ivObjectMain if there are commands in the map
-            commandOne = Truck.getInstance().getCommand(mapIndex, 0, truckObject);
-            commandTwo = Truck.getInstance().getCommand(mapIndex, 1, truckObject);
-            commandThree = Truck.getInstance().getCommand(mapIndex, 2, truckObject);
+            commandOne = Truck.getInstance().getCommand(mapIndex, 0);
+            commandTwo = Truck.getInstance().getCommand(mapIndex, 1);
+            commandThree = Truck.getInstance().getCommand(mapIndex, 2);
 
             if(commandOne != null)
             {

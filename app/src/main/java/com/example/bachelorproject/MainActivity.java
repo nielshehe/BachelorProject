@@ -114,12 +114,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
         int drivingFieldImage = getIntent().getIntExtra(MainLevelActivity.DRIVING_IMAGE, 0);
         imgField.setImageResource(drivingFieldImage);
 
+        // Initializing carposition
         currentX = getIntent().getIntExtra(MainLevelActivity.CAR_START_X, 0);
         currentY = getIntent().getIntExtra(MainLevelActivity.CAR_START_Y, 0);
-
-        // Initializing car, position and orientation
-        //currentX = 3;
-        //currentY = 3;
 
         // NB: Direction must be between 0-3
         int direction = 1;
@@ -177,10 +174,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
             for(int truckCommand = 0; truckCommand <= 2; truckCommand++)
             {
                 Commands command = Truck.getInstance().getCommands(truckObject, truckCommand);
-
-            //  System.out.println("---------------------------Printing collection---------------------------");
-            //  System.out.println(command);
-            //  System.out.println("---------------------------END OF COLLECTION---------------------------");
 
                 if(command == Commands.TIRE_MOVE_FORWARD) moveCar(1);
                 else if(command == Commands.TIRE_MOVE_BACKWARD) moveCar(-1);
@@ -275,6 +268,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
             truckObject = TruckObjects.CRANE;
         }
 
+        // TODO SE UDKOMMENTERET
 		// Set selected image on the "Start kran" image
 		if (v.getId() == R.id.ibtnTire || v.getId() == R.id.ibtnSteerWheel
 				|| v.getId() == R.id.ibtnCrane)
@@ -284,49 +278,49 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
                 help.setImageAndTag(ivMain1, imageId);
                 // Set the index of the Truck map when you add a object
                 index = 0;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain2.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain2, imageId);
                 index = 1;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
             }
 			else if (ivMain3.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain3, imageId);
                 index = 2;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain4.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain4, imageId);
                 index = 3;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain5.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain5, imageId);
                 index = 4;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain6.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain6, imageId);
                 index = 5;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain7.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain7, imageId);
                 index = 6;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
 			}
 			else if (ivMain8.getDrawable() == null)
 			{
                 help.setImageAndTag(ivMain8, imageId);
                 index = 7;
-                Truck.getInstance().addObject(index, truckObject);
+                //Truck.getInstance().addObject(index, truckObject);
 			}
 		}
         else {
@@ -375,9 +369,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener
                     break;
             }
 
-            Commands command1 = Truck.getInstance().getCommand(index, 0, truckObject);
-            Commands command2 = Truck.getInstance().getCommand(index, 1, truckObject);
-            Commands command3 = Truck.getInstance().getCommand(index, 2, truckObject);
+            Commands command1 = Truck.getInstance().getCommand(index, 0);
+            Commands command2 = Truck.getInstance().getCommand(index, 1);
+            Commands command3 = Truck.getInstance().getCommand(index, 2);
 
 			/*
 			 * creates an intent which, when executed with startActivity, does
