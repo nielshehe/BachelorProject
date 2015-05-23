@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.bachelorproject.DisplayCommandoActivity" >
+    tools:context="com.example.bachelorproject.DisplayCommandActivity" >
 
     <ImageView
         android:id="@+id/imageObjectMain"
@@ -95,14 +95,5 @@
             android:layout_weight="1"
             android:layout_gravity="center" />
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView2"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout" />
 
 </RelativeLayout>

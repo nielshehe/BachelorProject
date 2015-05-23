@@ -7,12 +7,13 @@ import android.widget.ImageView;
  */
 public class Helper
 {
-    // Method to get the image from an ImageView
+        // Method to get the image from an ImageView
     public int getImageId(ImageView view)
     {
         return (Integer) view.getTag();
     }
 
+    // Method to set an image on the view and set a tag
     public void setImageAndTag(ImageView image, int imageId)
     {
         image.setImageResource(imageId);

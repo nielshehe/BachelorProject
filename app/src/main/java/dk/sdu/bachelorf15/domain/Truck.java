@@ -2,54 +2,48 @@ package dk.sdu.bachelorf15.domain;
 
 import java.util.HashMap;
 
-import dk.sdu.bachelorf15.help.CommandInterface;
 import dk.sdu.bachelorf15.help.Commands;
+import dk.sdu.bachelorf15.help.Helper;
 import dk.sdu.bachelorf15.help.TruckObjects;
 
 public class Truck
 {
+    // Singleton pattern
+    private static Truck instance;
+
+    public static Truck getInstance()
+    {
+        if(instance == null)
+            instance = new Truck();
+        return instance;
+    }
+
     private HashMap<Integer, HashMap<Integer, Commands>> truck = new HashMap<>();
     private static final int MAX_LENGTH = 8;
+
+    private Commands[][] truckCommands;
+
+    private static final int MAX_OBJECT_LENGTH = 8;
+    private static final int MAX_COMMAND_LENGTH = 3;
 
     private Tire tire;
     private SteeringWheel steeringWheel;
     private Crane crane;
 
-    // TODO REMOVE UNUSED
-    private int index = 1;
-    private CommandInterface commads;
-
-    // TODO REMOVE UNUSED
-    /*public void addObject(TruckObjects obj)
+    public Truck()
     {
-        if(index <= MAX_LENGTH)
-        {
-            if(obj == TruckObjects.TIRE)
-            {
-                tire = new Tire();
-                truck.put(index, tire.getTireMap());
-                //Tire t = new Tire();
-                //truck.put(index, t.getTireMap());
-                index++;
-            }
-            else if (obj == TruckObjects.STEERINGWHEEL)
-            {
-                steeringWheel = new SteeringWheel();
-                truck.put(index, steeringWheel.getSteeringMap());
-                //SteeringWheel s = new SteeringWheel();
-                //truck.put(index, s.getSteeringMap());
-                index++;
-            }
-            else if(obj == TruckObjects.CRANE)
-            {
-                crane = new Crane();
-                truck.put(index, crane.getCraneMap());
-                //Crane c = new Crane();
-                //truck.put(index, c.getCraneMap());
-                index++;
-            }
-        }
-    }*/
+        truckCommands = new Commands[MAX_OBJECT_LENGTH][MAX_COMMAND_LENGTH];
+    }
+
+    public void addCommand(int objectIndex, int commandIndex, Commands command)
+    {
+        truckCommands[objectIndex][commandIndex] = command;
+    }
+
+    public Commands getCommands(int truckObjectIndex, int commandIndex)
+    {
+        return truckCommands[truckObjectIndex][commandIndex];
+    }
 
     public void addObject(int mapIndex, TruckObjects obj)
     {
@@ -73,42 +67,25 @@ public class Truck
         }
     }
 
-    /*public void addCommand(int i, TruckObjects truckObjects, Commands com)
+    public Commands getCommand(int index, int mapIndex, TruckObjects truckObject)
     {
-        // TODO GET THE MAP VALUE AND ADD A COMMAND TO IT
-        HashMap<Integer, Commands> map = truck.get(i);
-
-        if(truckObjects == TruckObjects.TIRE)
-        {
-            tire.addCommand(map, com);
-        } else if(truckObjects == TruckObjects.STEERINGWHEEL)
-        {
-            steeringWheel.addCommand(map, com);
-        } else if(truckObjects == TruckObjects.CRANE)
-        {
-            crane.addCommand(map, com);
-        }
-    }*/
-
-    public void addCommand(int truckIndex, int commandIndex, TruckObjects truckObjects, Commands com)
-    {
-        // TODO GET THE MAP VALUE AND ADD A COMMAND TO IT
-        HashMap<Integer, Commands> map = truck.get(truckIndex);
-
-        if(truckObjects == TruckObjects.TIRE)
-        {
-            tire.addCommand(commandIndex, map, com);
-        } else if(truckObjects == TruckObjects.STEERINGWHEEL)
-        {
-            steeringWheel.addCommand(commandIndex, map, com);
-        } else if(truckObjects == TruckObjects.CRANE)
-        {
-            crane.addCommand(commandIndex, map, com);
-        }
+        Commands com = truckCommands[index][mapIndex];
+        return com;
     }
 
     public String toString()
     {
         return truck.toString();
+    }
+
+    public void clearCommands()
+    {
+        for(int o = 0; o < MAX_OBJECT_LENGTH; o++)
+        {
+            for(int c = 0; c < MAX_COMMAND_LENGTH; c++)
+            {
+                truckCommands[o][c] = null;
+            }
+        }
     }
 }
